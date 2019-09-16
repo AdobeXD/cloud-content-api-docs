@@ -1,0 +1,8 @@
+{
+    "redirects": [
+        {
+            "from": "samples/index.html",
+            "to": "samples/index.html"
+        }
+    ]
+}
