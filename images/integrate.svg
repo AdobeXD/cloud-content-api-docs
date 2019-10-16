@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="150" viewBox="0 0 780 150">
+  <g id="Group_142164" data-name="Group 142164" transform="translate(-332 -369)">
+    <rect id="Rectangle_148028" data-name="Rectangle 148028" width="780" height="150" rx="10" transform="translate(332 369)" fill="#f2f2f2"/>
+    <text id="Integrate" transform="translate(548 453)" fill="#313131" font-size="24" font-family="Roboto-Light, Roboto" font-weight="300"><tspan x="-46.781" y="0">Integrate</tspan></text>
+    <text id="API_references_and_code_samples" data-name="API references and code samples" transform="translate(650 434)" fill="#323232" font-size="15" font-family="Roboto-Regular, Roboto"><tspan x="0" y="16">API references and code samples</tspan></text>
+    <rect id="Create_a_new_XD_plugin_project" data-name="Create a new XD plugin project" width="88" height="87" rx="10" transform="translate(385 401)" fill="#fff"/>
+    <line id="Line_6268" data-name="Line 6268" y2="71.996" transform="translate(615.007 408.5)" fill="none" stroke="#d3d3d3" stroke-width="2"/>
+    <path id="Path_61216" data-name="Path 61216" d="M-12078.579-11721.4l11.706,11.707-11.706,11.706" transform="translate(13124.342 12153.896)" fill="none" stroke="#1473e6" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+  </g>
+</svg>
