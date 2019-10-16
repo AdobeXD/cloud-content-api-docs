@@ -5,6 +5,6 @@ While designers create their work in Adobe XD, design stakeholders often spend t
 <a href="/tutorials/quick-start.md">
     <img src="/images/integrate.svg">
 </a>
-<a href="https://adobe.console.io">
+<a href="https://console.adobe.io">
     <img src="/images/go-live.svg">
 </a>
