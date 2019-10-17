@@ -8,3 +8,21 @@ While designers create their work in Adobe XD, design stakeholders often spend t
 <a href="https://console.adobe.io">
     <img src="/images/go-live.svg">
 </a>
+
+<img src="/images/code.svg">
+
+## Quick start: make your first API call
+
+Crack open your terminal and get ready to make your first cURL call. The XD Cloud API will provide you with metadata and rendition URLs in a familiar JSON response.
+
+[Start coding](/tutorials/quick-start.md)
+
+## Get started with an API key
+
+To communicate with XD Cloud content APIs, you’ll need your own unique API key to send along with each request. You can get your API key by reaching out and telling us a little about the integration you want to build.
+
+[Contact us]()
+
+<a href="https://forums.adobexdplatform.com">
+    <img src="/images/community.svg">
+</a>
