@@ -20,4 +20,4 @@ To communicate with XD Cloud content APIs, you’ll need your own unique API key
 
 [Contact us]()
 
-<a href="https://forums.adobexdplatform.com"><object style="width: 100%" type="image/png" data="/images/community.png"></object></a>
+<a href="https://forums.adobexdplatform.com"><object style="width: 100%" type="image/png" data="/images/community@3x.png"></object></a>
