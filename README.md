@@ -2,11 +2,11 @@
 
 While designers create their work in Adobe XD, design stakeholders often spend their time in other environments, like project management tools, communication services, and asset management systems. XD Cloud content APIs let you integrate design work created in Adobe XD into new places, connecting designers with the rest of the team.
 
-<a href="/tutorials/quick-start.md"><object style="width: 100%" type="image/png" data="/images/integrate.svg" alt="pladeholder"></object></a>
+<a href="/tutorials/quick-start.md"><object style="width: 100%" type="image/png" data="/images/integrate.svg">pladeholder</object></a>
 
-<a href="https://console.adobe.io"><object style="width: 100%" type="image/png" data="/images/go-live.svg" alt="pladeholder"></object></a>
+<a href="https://console.adobe.io"><object style="width: 100%" type="image/png" data="/images/go-live.svg">pladeholder</object></a>
 
-<object style="width: 100%" type="image/png" data="/images/code.svg" alt="pladeholder"></object>
+<object style="width: 100%" type="image/png" data="/images/code.svg">pladeholder</object>
 
 ## Quick start: make your first API call
 
@@ -20,4 +20,4 @@ To communicate with XD Cloud content APIs, you’ll need your own unique API key
 
 [Contact us]()
 
-<a href="https://forums.adobexdplatform.com"><object style="width: 100%" type="image/png" data="/images/community@3x.png" alt="pladeholder"></object></a>
+<a href="https://forums.adobexdplatform.com"><object style="width: 100%" type="image/png" data="/images/community@3x.png">pladeholder</object></a>
