@@ -1,10 +1,10 @@
-# Quick Start: Make your first XD Cloud API Call
+# Quick Start: Make your first XD Cloud Content API Call
 
-Let’s walk through making your first XD Cloud API call together.
+Let’s walk through making your first XD Cloud Content API call together.
 
 We'll keep things simple in this tutorial and use curl to make a request call. 
 
-At the end of the tutorial, we'll suggest some next steps for going deeper with the XD cloud APIs.
+At the end of the tutorial, we'll suggest some next steps for going deeper with the XD Cloud Content APIs.
 
 ## Prerequisites
 

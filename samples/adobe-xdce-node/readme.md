@@ -1,6 +1,6 @@
 # XD Cloud API Example: Node.js
 
-This sample app will show you how to make XD Cloud API calls using Node.js.
+This sample app will show you how to make XD Cloud Content API calls using Node.js.
 
 After setting up the sample, you will have a Node.js app that:
 
@@ -19,7 +19,7 @@ After setting up the sample, you will have a Node.js app that:
 1. [Configuration](#configuration)
     1. [Create an OpenSSL cert](#create-an-openssl-cert)
     1. [Install Node.js packages](#install-nodejs-packages)
-    1. [Enter your Adobe XD Cloud API credentials](#enter-your-adobe-xd-cloud-api-credentials)
+    1. [Enter your Adobe XD Cloud Content API credentials](#enter-your-adobe-xd-cloud-api-credentials)
 1. [Usage](#usage)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -69,7 +69,7 @@ $ cd ..
 $ npm install
 ```
 
-### Enter your Adobe XD Cloud API credentials
+### Enter your Adobe XD Cloud Content API credentials
 
 Enter the required credentials in `public/config.js`:
 
