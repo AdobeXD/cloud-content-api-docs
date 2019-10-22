@@ -6,9 +6,13 @@ While designers create their work in Adobe XD, design stakeholders often spend t
 
 <br />
 
+<object>
 <a href="/tutorials/quick-start.md"><object style="width: 100%" type="image/png" data="/images/integrate.png">pladeholder</object></a>
+</object>
 
-<a href=""><object style="width: 100%" type="image/png" data="/images/go-live.png">pladeholder</object></a>
+<object>
+<a href=""><object style="width: 100%; margin: 0;" type="image/png" data="/images/go-live.png">pladeholder</object></a>
+</object>
 
 <br />
 
@@ -33,4 +37,6 @@ To communicate with XD Cloud content APIs, you’ll need your own unique API key
 
 <br />
 
+<object>
 <a href="https://forums.adobexdplatform.com"><object style="width: 100%" type="image/png" data="/images/cloud-community.png">pladeholder</object></a>
+</object>
