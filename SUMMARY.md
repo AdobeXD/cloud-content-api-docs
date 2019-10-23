@@ -7,5 +7,5 @@
     * [Samples](./samples/index.md)
         * [Node](./samples/adobe-xdce-node/readme.md)
         * [Python](./samples/adobe-xdce-python/readme.md)
-* [Go Live](./tutorials/quick-start.md)
+* [Go Live](./golive.md)
 
