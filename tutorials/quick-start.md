@@ -98,5 +98,5 @@ This will return a response that contains various data about the artboard, such 
 
 ## Next Steps
 
-- Browse the [reference docs](/tutorials/debugging/index.md)
 - See working code in our [samples](/samples/index.md)
+- Browse the [references](/reference/)
