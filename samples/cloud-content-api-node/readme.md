@@ -37,9 +37,9 @@ Be sure to follow all instructions in the `readme`.
 
 ## Prerequisites
 
-This guide will assume that you have read the [Adobe OAuth 2.0 Guide for Web](../../web-oauth2.0-guide.md).
+This guide will assume that you have read the [Adobe OAuth 2.0 Guide for Web](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/AuthenticationOverview/OAuthIntegration.md).
 
-You must also have [a registered app on the Adobe I/O Console](../../web-oauth2.0-guide.md#register-your-application-and-enable-apis) with the following settings:
+You must also have [a registered app on the Adobe I/O Console](https://console.adobe.io/) with the following settings:
 
 1. `Platform`: web
 1. `Default redirect URI`: `https://localhost:8000`
@@ -86,7 +86,7 @@ try {
 catch (err) { }
 ```
 
-You can get your Adobe API Key and Secret from your registered app page on the [Adobe I/O Console](https://console.adobe.io/integrations).
+You can get your API Key by [contacting us](https://adobe.allegiancetech.com/surveys/JDQ78F/).
 
 ## Usage
 

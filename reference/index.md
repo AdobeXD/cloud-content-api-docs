@@ -11,7 +11,7 @@ xdceutils@adobe.com
 #### OPTIONS
 ##### Summary:
 
-Discovery API to get XDCE entry point for given publish link
+Discovery API to get Cloud Contents API entry point for given publish link
 
 ##### Description:
 
@@ -22,7 +22,7 @@ discovery API for a given published URL as header parameter
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| X-AdobeXD-Link | header | published XD artefact link to discover corresponding XDCE endpoint | Yes | string |
+| X-AdobeXD-Link | header | published XD artefact link to discover corresponding Cloud Contents API endpoint | Yes | string |
 
 ##### Responses
 

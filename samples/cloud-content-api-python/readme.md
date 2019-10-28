@@ -40,12 +40,9 @@ Be sure to follow all instructions in the `readme`.
 
 ## Prerequisites
 
-You must also have [a registered app on the Adobe I/O Console](https://console.adobe.io/integrations) with the following settings:
+This guide will assume that you have read the [Adobe OAuth 2.0 Guide for Web](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/AuthenticationOverview/OAuthIntegration.md).
 
-1. `Platform`: web
-1. `Default redirect URI`: `https://localhost:8000`
-1. `Redirect URI Pattern`: `https://localhost:8000`
-
+You must also have an API key by [registering your app with us](You can get your API Key by [contacting us](https://adobe.allegiancetech.com/surveys/JDQ78F/).
 
 ## Configuration
 
@@ -65,7 +62,7 @@ Make sure that after running this command you have the `cert.pem` and `key.pem` 
 
 ### Install Python libraries
 
-This sample app uses the [Flask](http://flask.pocoo.org/), [Requests](http://docs.python-requests.org/), and [Six](https://pythonhosted.org/six/) libraries. You can install them using the `pip` package manager:
+This sample app uses the [Flask](https://palletsprojects.com/p/flask/), [Requests](https://pypi.org/project/requests/2.7.0/), and [Six](https://pypi.org/project/six/) libraries. You can install them using the `pip` package manager:
 
 ```
 $ pip install flask
@@ -84,7 +81,7 @@ class Config(object):
     API_KEY = 'YOUR_API_KEY'
 ```
 
-You can get your Adobe API Key and Secret from your registered app page on the [Adobe I/O Console](../../web-oauth2.0-guide.md#register-your-application-and-enable-apis).
+You can get your API Key by [contacting us](https://adobe.allegiancetech.com/surveys/JDQ78F/).
 
 
 ## Usage

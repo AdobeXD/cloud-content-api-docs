@@ -4,7 +4,7 @@ const session = require('express-session')
 const request = require('request-promise');
 const https = require('https');
 const bodyParser = require('body-parser');
-const apiKey = require('../public/config.js').apiKey;
+const apiKey = require('../public/config.js.js.js').apiKey;
 const fs = require('fs');
 const path = require('path');
 
