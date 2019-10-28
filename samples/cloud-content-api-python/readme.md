@@ -42,7 +42,7 @@ Be sure to follow all instructions in the `readme`.
 
 This guide will assume that you have read the [Adobe OAuth 2.0 Guide for Web](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/AuthenticationOverview/OAuthIntegration.md).
 
-You must also have an API key by [registering your app with us](You can get your API Key by [contacting us](https://adobe.allegiancetech.com/surveys/JDQ78F/).
+You must also have an API key by [registering your app with us](https://adobe.allegiancetech.com/surveys/JDQ78F/). 
 
 ## Configuration
 
