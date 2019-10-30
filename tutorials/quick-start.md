@@ -43,7 +43,6 @@ After creating the link successfully, you will be able to copy the link to the c
 
 ![Copy link to the clipboard](/images/copy-link.png)
 
-
 ### 3. Find out what API endpoint can be used for a document URL
 
 Send an `OPTIONS` call and read the response header to learn what API calls can be maded for a particular XD document URL. Refer to the required headers and parameters in [the API reference page](/reference/index.md).
