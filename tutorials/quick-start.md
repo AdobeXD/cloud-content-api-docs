@@ -15,7 +15,7 @@ At the end of the tutorial, we'll suggest some next steps for going deeper with 
 
 ### 0. Get a Client ID and Client Secret
 
-Before you start, you'll want to request for a client ID and client secret by filling out [this form]().
+Before you start, you'll want to request for a client ID and client secret by filling out [this form](https://adobe.allegiancetech.com/surveys/JDQ78F/).
 
 If approved, your application will be assigned a unique set of client ID and client secret, which can be used to make API calls.
 

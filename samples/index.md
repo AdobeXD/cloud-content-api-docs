@@ -3,7 +3,7 @@
 The following samples demonstrate basic interaction with the Adobe XD Cloud API endpoints.
 
 - **Node.js Example**  
-  [Github repo]() where you can find a complete Node.js-based web app example that uses Adobe XD Cloud APIs.
+  [Github sample](/samples/cloud-content-api-node/readme.md) which is a complete Node.js-based web app example that uses Adobe XD Cloud Content APIs.
 
 - **Python Example**  
-  [Github repo]() where you can find a complete Python based web app example that uses Adobe XD Cloud APIs.
+  [Github sample](/samples/cloud-content-api-python/readme.md) which is a complete Python based web app example that uses Adobe XD Cloud Content APIs.

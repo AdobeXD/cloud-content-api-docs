@@ -71,11 +71,13 @@ Enter the required credentials in `public/config.js`:
 
 ```javascript
 const apiKey = "YOUR-API-KEY";
+const accessToken = "USER-ACCESS-TOKEN"
 
 try {
         if (module) {
                 module.exports = {
-                        apiKey
+                        apiKey,
+                        accessToken
                 }
         }
 }

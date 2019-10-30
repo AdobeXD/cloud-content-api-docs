@@ -5,6 +5,7 @@ const request = require('request-promise');
 const https = require('https');
 const bodyParser = require('body-parser');
 const apiKey = require('../public/config.js.js.js').apiKey;
+const accessToken = require('../public/config.js.js.js').accessToken;
 const fs = require('fs');
 const path = require('path');
 
@@ -40,6 +41,7 @@ app.post('/document', function (req, res) {
 		uri: `https://xdce.adobe.io/v2/document/${documentId}`,
 		headers: {
 			"x-api-key": apiKey,
+			"Authorization": `Bearer ${accessToken}`,
 			"accept": "application/vnd.adobe.xd.v1+json"
 		},
 		json: true

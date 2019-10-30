@@ -27,7 +27,7 @@ def document():
 
     # Use requests library to send the GET request
     response = requests.get(document_url,
-                            headers={'x-api-key': app.config['API_KEY'], 'accept': 'application/vnd.adobe.xd.v1+json'})
+                            headers={'x-api-key': app.config['API_KEY'], 'Authorization': 'Bearer {}'.format(app.config['ACCESS_TOKEN']), 'accept': 'application/vnd.adobe.xd.v1+json'})
 
     if response.status_code == 200:
         return flask.render_template('index.html', response=json.dumps(response.json()))
