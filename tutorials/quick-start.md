@@ -32,6 +32,16 @@ During this OAuth workflow, users will be asked to authorize your app to access 
 | Private Cloud Docs    | Required | Required     | Required          |
 
 
+Note that if your app tries to access a private XD cloud document without an access token, Cloud Content APIs will return the following error:
+
+```
+{
+    "error": {
+        "message": "Wrong/Missing authorization information"
+    }
+}
+```
+
 ### 2. Get the document URL
 
 You will need a document URL created from an XD document. In order to create a link, open Adobe XD and follow the steps below.
