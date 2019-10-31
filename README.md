@@ -16,7 +16,7 @@ XD Cloud Content APIs let you integrate design work created in Adobe XD with env
 
 <br />
 
-<object style="width: 100%" type="image/png" data="/images/code.svg">pladeholder</object>
+<object style="width: 100%" type="image/png" data="/images/code2.svg">pladeholder</object>
 
 
 **Quick start: make your first call**
