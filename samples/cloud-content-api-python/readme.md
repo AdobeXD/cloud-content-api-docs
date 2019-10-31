@@ -1,6 +1,6 @@
-# XD Cloud API Example: Python
+# XD Cloud Content API Example: Python
 
-This sample app will show you how to use XD Cloud APIs in Python using the Flask framework.
+This sample app will show you how to use XD Cloud Content APIs in Python using the Flask framework.
 
 After setting up the sample, you will have a Python app that:
 

@@ -1,4 +1,4 @@
-# Reference Docs
+# Endpoint References
 GET API's to discover and fetch published specs and prototypes the client can access
 
 ## Version: 1.0.0-oas3
@@ -11,7 +11,7 @@ xdceutils@adobe.com
 #### OPTIONS
 ##### Summary:
 
-Discovery API to get Cloud Contents API entry point for given publish link
+Discovery API to get Cloud Content API entry point for given publish link
 
 ##### Description:
 
@@ -22,7 +22,7 @@ discovery API for a given published URL as header parameter
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| X-AdobeXD-Link | header | published XD artefact link to discover corresponding Cloud Contents API endpoint | Yes | string |
+| X-AdobeXD-Link | header | published XD artefact link to discover corresponding Cloud Content API endpoint | Yes | string |
 
 ##### Responses
 

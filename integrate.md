@@ -1,8 +1,8 @@
 # Integrate
 
-Thanks for choosing to integrate with XD Cloud Contents APIs. We have put together some helpful documentation here for you to start integrating easily. 
+Thanks for choosing to integrate with the XD Cloud Content APIs. We have put together some helpful documentation here to help you get started on your integration.
 
 - [Quick start](/tutorials/quick-start.md)
+- [Endpoint References](/reference/index.md)
 - [Samples](/samples/index.md)
-- [API Reference](/reference/index.md)
 

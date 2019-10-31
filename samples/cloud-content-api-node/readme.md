@@ -1,4 +1,4 @@
-# XD Cloud API Example: Node.js
+# XD Cloud Content API Example: Node.js
 
 This sample app will show you how to make XD Cloud Content API calls using Node.js.
 
