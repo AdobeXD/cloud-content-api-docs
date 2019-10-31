@@ -84,7 +84,7 @@ try {
 catch (err) { }
 ```
 
-You can get your API Key by [contacting us](https://adobe.allegiancetech.com/surveys/JDQ78F/).
+You can get your API Key by [contacting us](https://adobe.allegiancetech.com/surveys/JDQ78F/). Note that `accessToken` is only required if your application is going to access private XD cloud documents. In order to get the `accessToken`, your app has to [integrate Adobe IO OAuth workflow](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/OAuth/OAuth.md).
 
 ## Usage
 
