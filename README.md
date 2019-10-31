@@ -7,12 +7,12 @@ XD Cloud Content APIs let you integrate design work created in Adobe XD with env
 <br />
 
 <object>
-<a href="/tutorials/quick-start.md"><object style="width: 100%" type="image/png" data="/images/integrate.png">pladeholder</object></a>
+<a href="/tutorials/quick-start.md"><object style="width: 100%" type="image/png" data="/images/integrate2.svg">pladeholder</object></a>
 </object>
 
-<object>
+<!-- <object>
 <a href=""><object style="width: 100%; margin: 0;" type="image/png" data="/images/go-live.png">pladeholder</object></a>
-</object>
+</object> -->
 
 <br />
 
@@ -27,7 +27,7 @@ Crack open your terminal and get ready to make your first cURL call. The XD Clou
 
 <br />
 
-<object style="width: 100%" type="image/png" data="/images/placeholder.png">pladeholder</object>
+<object style="width: 100%" type="image/png" data="/images/get-started.svg">pladeholder</object>
 
 **Get your unique API key**
 
