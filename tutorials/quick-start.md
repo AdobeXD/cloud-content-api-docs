@@ -28,6 +28,16 @@ XD cloud documents are either private or public. If you are building an integrat
 | Private Cloud Docs    | Required | Required     | Required          |
 | Public Cloud Docs     | Required | Not Required | Not Required      |
 
+Note that if your app tries to access a private XD cloud document without an access token, Cloud Content APIs will return the following error:
+
+```
+{
+    "error": {
+        "message": "Wrong/Missing authorization information"
+    }
+}
+```
+
 ### 2. Get the document URL
 
 You will need a document URL created from an XD document. In order to create a link, follow the steps below.
