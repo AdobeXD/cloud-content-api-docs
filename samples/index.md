@@ -1,6 +1,6 @@
 # Samples
 
-The following code samples demonstrate basic interaction with the Adobe XD Cloud Content APIs.
+Vist our [GitHub repo of code samples](https://github.com/AdobeXD/cloud-content-api-samples) that demonstrate basic interaction with the Adobe XD Cloud Content APIs.
 
 ## Node.js Example
 
