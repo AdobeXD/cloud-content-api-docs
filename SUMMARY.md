@@ -6,6 +6,4 @@
     * [Endpoint References](./reference/index.md)
     * [FAQ](./reference/faq.md)
     * [Samples](./samples/index.md)
-        * [Node](./samples/cloud-content-api-node/readme.md)
-        * [Python](./samples/cloud-content-api-python/readme.md)
 
