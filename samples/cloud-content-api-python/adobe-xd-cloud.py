@@ -21,7 +21,7 @@ def home():
 
 @app.route('/document', methods=['POST'])
 def document():
-    # Adobe XD Cloud API document url
+    # Adobe XD Cloud Content API document url
     document_id = flask.request.form['text']
     document_url = 'https://xdce.adobe.io/v2/document/{}'.format(document_id)
 
