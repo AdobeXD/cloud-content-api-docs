@@ -1,11 +1,6 @@
 # Reference Docs
 GET API's to discover and fetch published specs and prototypes the client can access
 
-## Version: 1.0.0-oas3
-
-**Contact information:**  
-xdceutils@adobe.com  
-
 ### /v2/api
 
 #### OPTIONS
