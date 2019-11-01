@@ -7,7 +7,7 @@ XD Cloud Content APIs let you integrate design work created in Adobe XD with env
 <br />
 
 <object>
-<a href="/tutorials/quick-start.md"><object style="width: 100%" type="image/png" data="/images/integrate2.svg">API references and code samples</object></a>
+<a href="/tutorials/quick-start.md"><object style="width: 100%" type="image/png" data="/images/integrate@3x.png">API references and code samples</object></a>
 </object>
 
 <!-- <object>
