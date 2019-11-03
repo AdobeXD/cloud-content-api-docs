@@ -6,18 +6,11 @@ XD Cloud Content APIs let you integrate design work created in Adobe XD with env
 
 <br />
 
-<object>
-<a href="/tutorials/quick-start.md"><object style="width: 100%" type="image/png" data="/images/integrate@3x.png">API references and code samples</object></a>
-</object>
-
-<!-- <object>
-<a href=""><object style="width: 100%; margin: 0;" type="image/png" data="/images/go-live.png">placeholder</object></a>
-</object> -->
+<a href="/tutorials/quick-start.md"><img alt="Integrate: API references and code samples" src="/images/integrate@3x.png" class="plain" style="width: 100%"/></a>
 
 <br />
 
-<object style="width: 100%" type="image/png" data="/images/code2.svg">Quick start: make your first call</object>
-
+<img alt="Quick start: make your first call" src="/images/code2.svg" class="plain" style="width: 100%"/>
 
 **Quick start: make your first call**
 
@@ -27,7 +20,7 @@ Crack open your terminal and get ready to make your first cURL call. The XD Clou
 
 <br />
 
-<object style="width: 100%" type="image/png" data="/images/get-started.svg">Get your unique API key</object>
+<img alt="Get your unique API key" src="/images/get-started.svg" class="plain" style="width: 100%"/>
 
 **Get your unique API key**
 
@@ -37,6 +30,4 @@ To communicate with XD Cloud Content APIs, you’ll need your own unique API key
 
 <br />
 
-<object>
-<a href="https://forums.adobexdplatform.com"><object style="width: 100%" type="image/png" data="/images/cloud-community.png">XD Cloud Content API developer community</object></a>
-</object>
+<img alt="XD Cloud Content API developer community" src="/images/cloud-community.png" class="plain" style="width: 100%"/>
