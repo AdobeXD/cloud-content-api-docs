@@ -1,6 +1,9 @@
 # Summary
 
-* [Quick start](./README.md)
-* [References](./reference/index.md)
-* [Samples](./samples/index.md)
+* [Overview](./README.md)
+* [Integrate](./integrate.md)
+    * [Quick Start](./tutorials/quick-start.md)
+    * [Endpoint References](./reference/index.md)
+    * [FAQ](./reference/faq.md)
+    * [Samples](./samples/index.md)
 
