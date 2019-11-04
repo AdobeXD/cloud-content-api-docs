@@ -1,0 +1,639 @@
+
+<!DOCTYPE HTML>
+<html lang>
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Quick Start &#xB7; Adobe XD Cloud Reference</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content>
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Adobe">
+        
+        
+    
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc/page-toc.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-collapse/collapse.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-interactive/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-styled-blockquotes/plugin-styled-blockquotes.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-simpletabs/tabs.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-image-captions/image-captions.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fancybox/jquery.fancybox.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fancybox/jquery.fancybox-buttons.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    
+    <link rel="stylesheet" type="text/css" href="../public/custom.css">
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../reference/">
+    
+    
+    <link rel="prev" href="../integrate.html">
+    
+
+    </head>
+    <body><div class="gitbookPluginComponent"><!-- privacy management via evidon -->
+<link rel="stylesheet" type="text/css" href="https://wwwimages2.adobe.com/etc/beagle/public/globalnav/adobe-privacy/latest/privacy.min.css">
+<script defer src="https://wwwimages2.adobe.com/etc/beagle/public/globalnav/adobe-privacy/latest/privacy.min.js"></script>
+<script defer>
+  function createTrackerID() {
+    let fmt = 'xxxxxxxx-xxxx-4xxx-1xxx-xxxxxxxxxxxx';
+    return fmt.split("").map(function (c) {
+      if (c === 'x') {
+        return Math.floor(Math.random() * 16).toString(16);
+      } else {
+        return c;
+      }
+    }).join("");
+  }
+
+  let INGEST_ENDPOINT = "https://cc-api-data.adobe.io/ingest";
+  let TRACKER_KEY = "xdplatform";
+  let ENVIRONMENT = "prod";
+  let tracker;
+  let evidonTimer = setTimeout(track, 500);
+
+  /* report page hit IF we have privacy consent from the user */
+  window.addEventListener("adobePrivacy:PrivacyConsent", function () {
+
+    // check if the user has a cookie
+    let cookies = document.cookie.split(';');
+    let trackerCookie = cookies.filter(function (v) {
+      return v.trim().substr(0, TRACKER_KEY.length + 1) === TRACKER_KEY + '=';
+    });
+    if (trackerCookie.length > 0) {
+      tracker = trackerCookie[0].split("=")[1];
+    } else {
+      tracker = createTrackerID();
+      document.cookie = TRACKER_KEY + "=" + tracker;
+    }
+
+    clearInterval(evidonTimer);
+    track();
+
+    if (typeof gitbook !== "undefined") {
+      gitbook.events.on("page.change", () => track());
+    }
+  });
+
+  function track() {
+
+    // track the page hit
+    let req = new XMLHttpRequest();
+    req.open("POST", INGEST_ENDPOINT);
+
+    req.setRequestHeader("Content-Type", "application/json");
+    req.setRequestHeader("X-API-Key", "xdplatform-web-service");
+
+    // (Note: we don't care about errors here)
+
+    let data = {
+      "events": [{
+        "project": "xdplatform-web-service",
+        "environment": ENVIRONMENT,
+        "time": new Date().toISOString(),
+        "ingesttype": "dunamis",
+        "data": {
+          "event.workflow": "XD",
+          "event.category": "WEB",
+          "event.subcategory": "VIEW",
+          "event.type": "render",
+          "event.type": "page",
+          "event.pagename": location.hostname + location.pathname,
+          "event.user_guid": tracker || createTrackerID(), // fall back to random ID (in case of no evidon)
+          "event.user_agent": navigator.userAgent,
+          "event.language": navigator.language,
+          "event.url": location.href,
+          "event.referrer": document.referrer,
+          "source.name": "XD Platform",
+          "source.platform": "Web"
+        }
+      }]
+    };
+
+    req.send(JSON.stringify(data));
+
+  }
+</script>
+
+<header style="padding-left: 5%; border-bottom: 1px solid #ddd; height: 96px; display: flex; flex-direction: row; align-items: center;">
+  <a href="https://adobexdplatform.com/" style="height: 32px; width: 32px; margin: 0px 12px 24px 0px; position: relative; top: 14px;">
+    <img src="/images/xd-logo.png" style="height: 32px; width: 32px; margin-left: 0"></a>
+  <h1 style="color: black; margin-top: 17px; margin-bottom: 14px; font-size: 18px; font-weight: bold; font-family: roboto">
+    <a href="https://adobexdplatform.com/">Adobe XD
+      Platform</a></h1>
+  <ul style="list-style: none; margin-top: 14px;">
+    <li style="display: inline-block; list-style: none; text-align: -webkit-match-parent; margin-right: 23px; ">
+      <a href="https://adobexdplatform.com/plugin-docs/" style="color: black; text-decoration: none; font-family: roboto, medium; font-size: 15px; font-weight:400;">Plugin
+        APIs</a>
+    </li>
+    <li style="display: inline-block; list-style: none; text-align: -webkit-match-parent; margin-right: 23px; ">
+      <a href="https://adobexdplatform.com/cloud-content-api-docs/" style="color: black; text-decoration: none; font-family: roboto, medium; font-size: 15px; font-weight:400;">Cloud
+        Content
+        APIs</a></li>
+    <li style="display: inline-block; list-style: none; text-align: -webkit-match-parent; margin-right: 23px;">
+      <a href="https://adobexdplatform.com/community-and-support/" style="color: black; text-decoration: none; font-family: roboto, medium; font-size: 15px; font-weight:400;">Community
+        &amp;
+        Support</a></li>
+  </ul>
+  <!-- <a style="margin-left:auto; margin-right:10%;" href="https://console.adobe.io/plugins">
+<button type="button" class="console-btn coral-btn coral-btn-cta"> I/O Developer Console</button>
+</a> -->
+</header>
+<!-- <div class="divider">
+<p class="divider-text">Community and Support</p>
+</div> --></div>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../integrate.html">
+            
+                <a href="../integrate.html">
+            
+                    
+                    Integrate
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.2.1" data-path="quick-start.html">
+            
+                <a href="quick-start.html">
+            
+                    
+                    Quick Start
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../reference/">
+            
+                <a href="../reference/">
+            
+                    
+                    Endpoint References
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../reference/faq.html">
+            
+                <a href="../reference/faq.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../samples/">
+            
+                <a href="../samples/">
+            
+                    
+                    Samples
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="..">Quick Start</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="quick-start-make-your-first-api-call">Quick Start: Make your first API call</h1>
+<p>Let&#x2019;s walk through making your first XD Cloud Content API call together.</p>
+<p>We&apos;ll keep things simple in this tutorial and use the command line tool <a href="https://curl.haxx.se" target="_blank">cURL</a> to make a request call. </p>
+<p>At the end of the tutorial, we&apos;ll suggest some next steps for going deeper with the XD Cloud Content APIs.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Basic knowledge of Command Line Interfaces and APIs</li>
+<li>A text editor to write your code in (like VSCode, Sublime Text, Brackets, Atom, etc)</li>
+</ul>
+<h2 id="development-steps">Development Steps</h2>
+<h3 id="0-get-a-client-id-and-client-secret">0. Get a client ID and client secret</h3>
+<p>Before you start, you&apos;ll want to request a client ID and client secret by filling out <a href="https://adobe.allegiancetech.com/surveys/JDQ78F/" target="_blank">this form</a>.</p>
+<p>If approved, you will be assigned a unique client ID and client secret, which can be used to make API calls.</p>
+<h3 id="1-decide-whether-your-app-will-access-private-cloud-docs-or-not">1. Decide whether your app will access private cloud docs or not</h3>
+<p>XD cloud documents are either private or public, depending on how the user has chosen to share them. If you are building an integration that requires access to private XD cloud ducments, your app will need an access token which can be obtained through an <a href="https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/OAuth/OAuth.md" target="_blank">OAuth integration</a>.</p>
+<p>During this OAuth workflow, users will be asked to authorize your app to access private cloud documents. </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>API Key</th>
+<th>API Secret</th>
+<th>Access Token</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Public Cloud Docs</td>
+<td>Required</td>
+<td>Not Required</td>
+<td>Not Required</td>
+</tr>
+<tr>
+<td>Private Cloud Docs</td>
+<td>Required</td>
+<td>Required</td>
+<td>Required</td>
+</tr>
+</tbody>
+</table>
+<p>Note that if your app tries to access a private XD cloud document without an access token, Cloud Content APIs will return the following error:</p>
+<pre><code>{
+    &quot;error&quot;: {
+        &quot;message&quot;: &quot;Wrong/Missing authorization information&quot;
+    }
+}
+</code></pre><h3 id="2-get-the-document-url">2. Get the document URL</h3>
+<p>You will need a document URL created from an XD document. In order to create a link, open Adobe XD and follow the steps below.</p>
+<p>First, click on the &quot;Share&quot; button at the top right corner and select &quot;Share for Review&quot;:</p>
+<figure id="fig1.2.1.1">     <a href="../images/share-button-click.png" rel="grouped" title="Share for review" target="_self" class="fancybox">
+       <img src="../images/share-button-click.png" alt="Share for review">
+     </a><figcaption>Figure: Share for review</figcaption></figure>
+<p>You will be asked to configure some settings. After choosing the right options for you, click on the &quot;Create Link&quot; button:</p>
+<figure id="fig1.2.1.2">     <a href="../images/create-link-button-click.png" rel="grouped" title="Set options and create a link" target="_self" class="fancybox">
+       <img src="../images/create-link-button-click.png" alt="Set options and create a link">
+     </a><figcaption>Figure: Set options and create a link</figcaption></figure>
+<p>After creating the link successfully, you will be able to copy the link to the clipboard:</p>
+<figure id="fig1.2.1.3">     <a href="../images/copy-link.png" rel="grouped" title="Copy link to the clipboard" target="_self" class="fancybox">
+       <img src="../images/copy-link.png" alt="Copy link to the clipboard">
+     </a><figcaption>Figure: Copy link to the clipboard</figcaption></figure>
+<p>We&apos;ll use that link in the next step.</p>
+<h3 id="3-find-out-what-api-endpoint-can-be-used-for-a-document-url">3. Find out what API endpoint can be used for a document URL</h3>
+<p>Send an <code>OPTIONS</code> call and read the response header to learn what API calls can be made for a particular XD document URL. Refer to the required headers and parameters in <a href="../reference/">the endpoint references page</a>.</p>
+<pre><code>curl -I -X OPTIONS -H &quot;x-api-key: YOUR-API-KEY&quot; -H &quot;X-AdobeXD-Link: https://xd.adobe.com/view/21652643-762a-41c6-5cd9-6342060e8aff-5754/&quot; https://xdce.adobe.io/v2/api
+</code></pre><p>This should return a response header like this:</p>
+<pre><code>Access-Control-Allow-Headers &#x2192;Origin, Content-Type, Accept, X-Api-Key, X-AdobeXD-Link, User-Agent
+Access-Control-Allow-Methods &#x2192;OPTIONS
+Access-Control-Allow-Origin &#x2192;*
+Access-Control-Expose-Headers &#x2192;x-request-id, Content-Type, Content-Length, Link
+Connection &#x2192;keep-alive
+Content-Length &#x2192;0
+Content-Type &#x2192;application/json; charset=utf-8
+Date &#x2192;Mon, 14 Oct 2019 20:57:24 GMT
+Link &#x2192;&lt;/v2/document/21652643-762a-41c6-5cd9-6342060e8aff-5754&gt;; rel=document
+Server &#x2192;openresty
+Strict-Transport-Security &#x2192;max-age=15552000; includeSubDomains
+Vary &#x2192;Accept-Encoding
+X-Content-Type-Options &#x2192;nosniff
+X-DNS-Prefetch-Control &#x2192;off
+X-Download-Options &#x2192;noopen
+X-Frame-Options &#x2192;SAMEORIGIN
+X-Request-Id &#x2192;gJeLsvCSjgTXhhDEp8uGMa0rnBrNeZXo
+X-XSS-Protection &#x2192;1; mode=block
+</code></pre><p>The value of the <code>Link</code> key is the endpoint you can use to make further API calls. In this example, that value is:</p>
+<pre><code>/v2/document/21652643-762a-41c6-5cd9-6342060e8aff-5754
+</code></pre><h3 id="4-make-a-get-call-to-the-document-endpoint">4. Make a <code>GET</code> call to the <code>document</code> endpoint</h3>
+<p>Now that you&apos;ve retrieved the exact endpoint, you can make a <code>GET</code> call to the API. Refer to the required headers and parameters in <a href="../reference/">the endpoint references page</a>.</p>
+<pre><code>curl -H &quot;x-api-key: YOUR-API-KEY&quot; https://xdce.adobe.io/v2/document/21652643-762a-41c6-5cd9-6342060e8aff-5754
+</code></pre><p>This will return a JSON response that contains various data about the document, including the following and more:</p>
+<ul>
+<li><code>id</code></li>
+<li><code>name</code></li>
+<li><code>thumbnail</code></li>
+<li><code>publisher</code></li>
+<li><code>artboardCount</code></li>
+<li><code>artboards</code></li>
+<li><code>homeArtboardId</code></li>
+<li><code>version</code></li>
+<li><code>lastupdated</code></li>
+<li><code>history</code></li>
+<li><code>assetID</code></li>
+<li><code>includesDevelopmentData</code></li>
+</ul>
+<p>You can leverage this response data in your integration as-is. Or, in some cases, you can use the data to dig deeper. We&apos;ll look how to do that with the <code>artboards</code> data in the next step.</p>
+<h3 id="4-make-a-get-call-to-the-artboard-endpoint">4. Make a <code>GET</code> call to the <code>artboard</code> endpoint</h3>
+<p>The response we received above contains the <code>artboards</code> key with an array value of <code>artboard</code> objects. Each <code>artboard</code> object contains a unique <code>id</code>. You can use this value to make a <code>GET</code> call to the <code>artboard</code> endpoint. </p>
+<p>Note that you need to chain the artboard URL to the document URL used in the previous step. Refer to the required headers and parameters in <a href="../reference/">the endpoint references page</a>.</p>
+<pre><code>curl -H &quot;x-api-key: YOUR-API-KEY&quot; https://xdce.adobe.io/v2/document/21652643-762a-41c6-5cd9-6342060e8aff-5754/artboard/5dec1809-bf44-4e9b-aef5-6e46e8aa18e9
+</code></pre><p>This will return a response that contains various data about a given artboard, including:</p>
+<ul>
+<li><code>id</code></li>
+<li><code>name</code></li>
+<li><code>resourceAPI</code></li>
+<li><code>thumbnail</code></li>
+<li><code>bounds</code></li>
+<li><code>viewportBounds</code></li>
+<li><code>triggers</code></li>
+<li><code>parent</code></li>
+</ul>
+<p>Congratulations on making your first couple of calls to the XD Cloud Content APIs!</p>
+<h2 id="next-steps">Next Steps</h2>
+<p>Now you&apos;re ready to move forward in building you integration with XD Cloud Content APIs.</p>
+<ul>
+<li>Browse the <a href="../reference">endpoint references</a></li>
+<li>See working code in our <a href="../samples/">samples</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class="search-results-count"></span> results matching &quot;<span class="search-query"></span>&quot;</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching &quot;<span class="search-query"></span>&quot;</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../integrate.html" class="navigation navigation-prev " aria-label="Previous page: Integrate">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../reference/" class="navigation navigation-next " aria-label="Next page: Endpoint References">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Quick Start","level":"1.2.1","depth":2,"next":{"title":"Endpoint References","level":"1.2.2","depth":2,"path":"reference/index.md","ref":"./reference/index.md","articles":[]},"previous":{"title":"Integrate","level":"1.2","depth":1,"path":"integrate.md","ref":"./integrate.md","articles":[{"title":"Quick Start","level":"1.2.1","depth":2,"path":"tutorials/quick-start.md","ref":"./tutorials/quick-start.md","articles":[]},{"title":"Endpoint References","level":"1.2.2","depth":2,"path":"reference/index.md","ref":"./reference/index.md","articles":[]},{"title":"FAQ","level":"1.2.3","depth":2,"path":"reference/faq.md","ref":"./reference/faq.md","articles":[]},{"title":"Samples","level":"1.2.4","depth":2,"path":"samples/index.md","ref":"./samples/index.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["page-toc","anchorjs","collapse","-pretty-term","code","dashing","todo","-devops","expandable-chapters-interactive","styled-blockquotes","-codetabs","-recently-updated","-github-buttons","-prism","highlight","-lunr","-search","search-plus","addcssjs","replace","simpletabs","-layout","components","-lightbox","github-tables","nestedmd","image-captions","fancybox","bulk-redirect"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fancybox":{"helpers":{"buttons":{}}},"todo":{},"page-toc":{"selector":".markdown-section h2, .markdown-section h3, .markdown-section h4","position":"before-first","showByDefault":true},"styled-blockquotes":{},"addcssjs":{"js":[],"css":["./public/custom.css"]},"code":{"copyButtons":true},"collapse":{},"nestedmd":{},"github-tables":{"myConfigKey":"it's the default value"},"simpletabs":{},"dashing":{"selectors":["h1, h2, h3, h4, h5, h6, p, ul, ol"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"expandable-chapters-interactive":{},"replace":{"substitutes":[{"pattern":"\\\\\\*","flags":"g","substitute":"*"},{"pattern":"\\\\\\|","flags":"g","substitute":" or "},{"pattern":"<a name=","flags":"gi","substitute":"<a id="},{"pattern":"([^\\[])`(Attr|BaseUIEvent|CharacterData|ClassList|Clipboard|CloseEvent|Comment|Document|DocumentFragment|DOMException|DOMTokenList|DragEvent|Element|Event|EventTarget|GestureEvent|HTMLElement|HTMLAncorElement|HTMLBodyElement|HTMLButtonElement|HTMLDialogElement|HTMLFormElement|HTMLHeadElement|HTMlHtmlElement|HTMLImageElement|HTMLInputElement|HTMLLabelElement|HTMLLinkElement|HTMLMenuElement|HTMLOptionElement|HTMLProgressELement|HTMLScriptElement|HTMLSelectElement|HTMLStyleElement|HTMLTextAreaElement|KeyboardEvent|MessageEvent|NamedNodeMap|NodeList|PointerEvent|ProgressEvent|Shell|WebSocket|XMLHttpRequest|CSSRule|CSSRuleList|CSSStyleDeclaration|CSSStyleRule|CSSStyleSheet|FocusEvent)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/uxp/class/$2.html)$3"},{"pattern":"([^\\[])`(application|Blur|clipboard|Color|commands|ImageFill|LinearGradientFill|Matrix|scenegraph|SceneNodeList|selection|Shadow|OS)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/$2.html)$3"},{"pattern":"([^\\[])`(SceneNode|RootNode|Group|GraphicNode|Rectangle|Artboard|Ellipse|Line|Path|BooleanGroup|SymbolInstance|RepeatGrid|LinkedGraphic)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/scenegraph.html#$2)$3"},{"pattern":"([^\\[])`(fetch)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/uxp/function/$2.html)$3"},{"pattern":"([^\\[])`(storage)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/uxp/module/$2.html)$3"},{"pattern":"\\[`(Attr|BaseUIEvent|CharacterData|ClassList|Clipboard|CloseEvent|Comment|Document|DocumentFragment|DOMException|DOMTokenList|DragEvent|Element|Event|EventTarget|GestureEvent|HTMLElement|HTMLAncorElement|HTMLBodyElement|HTMLButtonElement|HTMLDialogElement|HTMLFormElement|HTMLHeadElement|HTMlHtmlElement|HTMLImageElement|HTMLInputElement|HTMLLabelElement|HTMLLinkElement|HTMLMenuElement|HTMLOptionElement|HTMLProgressELement|HTMLScriptElement|HTMLSelectElement|HTMLStyleElement|HTMLTextAreaElement|KeyboardEvent|MessageEvent|NamedNodeMap|NodeList|PointerEvent|ProgressEvent|Shell|WebSocket|XMLHttpRequest|CSSRule|CSSRuleList|CSSStyleDeclaration|CSSStyleRule|CSSStyleSheet|FocusEvent)`\\]\\([^\\)]*\\)","flags":"g","substitute":"[ `$1` ](/reference/uxp/class/$1.html)"},{"pattern":"\\([^#\\)]*#(storage)\\)","flags":"g","substitute":"(/reference/uxp/module/$1.html)"},{"pattern":"\\([^#\\)]*#(fetch)\\)","flags":"g","substitute":"(/reference/uxp/function/$1.html)"}]},"components":{"templatePath":"public/","templates":[{"name":"header","target":"body","prepend":"true"},{"name":"footer","target":"body","prepend":"false"}]},"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"github-buttons":{"buttons":[{"user":"AdobeXD","repo":"Plugin-Docs","type":"star","size":"small"},{"user":"AdobeXD","type":"follow","width":"130","count":false,"size":"small"}]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{},"search-plus":{},"image-captions":{"variable_name":"_pictures"}},"theme":"default","author":"Adobe","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Georgia","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"./index.html#fig1.1.1","level":"1.1","list_caption":"Figure: Quick start: make your first call","alt":"Quick start: make your first call","nro":1,"url":"/images/code2.svg","index":1,"caption_template":"Figure: _CAPTION_","label":"Quick start: make your first call","attributes":{},"skip":false,"key":"1.1.1"},{"backlink":"./index.html#fig1.1.2","level":"1.1","list_caption":"Figure: Get your unique API key","alt":"Get your unique API key","nro":2,"url":"/images/get-started.svg","index":2,"caption_template":"Figure: _CAPTION_","label":"Get your unique API key","attributes":{},"skip":false,"key":"1.1.2"},{"backlink":"./index.html#fig1.1.3","level":"1.1","list_caption":"Figure: XD Cloud Content API developer community","alt":"XD Cloud Content API developer community","nro":3,"url":"/images/cloud-community.png","index":3,"caption_template":"Figure: _CAPTION_","label":"XD Cloud Content API developer community","attributes":{},"skip":false,"key":"1.1.3"},{"backlink":"./tutorials/quick-start.html#fig1.2.1.1","level":"1.2.1","list_caption":"Figure: Share for review","alt":"Share for review","nro":4,"url":"/images/share-button-click.png","index":1,"caption_template":"Figure: _CAPTION_","label":"Share for review","attributes":{},"skip":false,"key":"1.2.1.1"},{"backlink":"./tutorials/quick-start.html#fig1.2.1.2","level":"1.2.1","list_caption":"Figure: Set options and create a link","alt":"Set options and create a link","nro":5,"url":"/images/create-link-button-click.png","index":2,"caption_template":"Figure: _CAPTION_","label":"Set options and create a link","attributes":{},"skip":false,"key":"1.2.1.2"},{"backlink":"./tutorials/quick-start.html#fig1.2.1.3","level":"1.2.1","list_caption":"Figure: Copy link to the clipboard","alt":"Copy link to the clipboard","nro":6,"url":"/images/copy-link.png","index":3,"caption_template":"Figure: _CAPTION_","label":"Copy link to the clipboard","attributes":{},"skip":false,"key":"1.2.1.3"}]},"title":"Adobe XD Cloud Reference","gitbook":"*","description":"Documentation, tutorials, how-tos, and technical reference for building Adobe XD Cloud integrations"},"file":{"path":"tutorials/quick-start.md","mtime":"2019-11-01T13:50:28.850Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-04T04:03:24.876Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc/anchor-3.1.1.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc/page-toc.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-anchorjs/anchor.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-collapse/collapse.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-interactive/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-simpletabs/tabs.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.mousewheel.pack.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.fancybox.pack.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/jquery.fancybox-buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fancybox/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    
+
+    <div class="gitbookPluginComponent"><div style="background-size: cover; background-color: rgb(44, 44, 44);">
+    <div style="display: flex; flex-flow: row wrap; justify-content: space-between; align-items: baseline; margin: 0 28px; line-height: 32px;">
+        <p style="margin: 0;" class="footer evidon-notice-link">&#xA9; Copyright 2019 Adobe. All rights reserved. / <a rel="noopener noreferrer" target="_blank" href="https://www.adobe.com/privacy.html">Privacy</a>
+            / <a target="_blank" rel="noopener noreferrer" href="https://www.adobe.com/legal/terms.html">Terms of
+                Use</a> / <a target="_blank" rel="noopener noreferrer" href="https://www.adobe.com/privacy/cookies.html">Cookies</a> /
+        </p>
+    </div>
+</div></div></body>
+</html>
+

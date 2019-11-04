@@ -103,110 +103,121 @@
 
     
     
-    <link rel="prev" href="../reference/">
+    <link rel="prev" href="../reference/faq.html">
     
 
     </head>
-    <body><div class="gitbookPluginComponent">  <!-- privacy management via evidon -->
-  <link rel="stylesheet" type="text/css" href="https://wwwimages2.adobe.com/etc/beagle/public/globalnav/adobe-privacy/latest/privacy.min.css">
-  <script defer src="https://wwwimages2.adobe.com/etc/beagle/public/globalnav/adobe-privacy/latest/privacy.min.js"></script>
-  <script defer>
-    function createTrackerID() {
-      let fmt = 'xxxxxxxx-xxxx-4xxx-1xxx-xxxxxxxxxxxx';
-      return fmt.split("").map(function (c) {
-        if (c === 'x') {
-          return Math.floor(Math.random() * 16).toString(16);
-        } else {
-          return c;
-        }
-      }).join("");
-    }
-
-    let INGEST_ENDPOINT = "https://cc-api-data.adobe.io/ingest";
-    let TRACKER_KEY = "xdplatform";
-    let ENVIRONMENT = "prod";
-    let tracker;
-    let evidonTimer = setTimeout(track, 500);
-
-    /* report page hit IF we have privacy consent from the user */
-    window.addEventListener("adobePrivacy:PrivacyConsent", function () {
-
-      // check if the user has a cookie
-      let cookies = document.cookie.split(';');
-      let trackerCookie = cookies.filter(function (v) {
-        return v.trim().substr(0, TRACKER_KEY.length + 1) === TRACKER_KEY + '=';
-      });
-      if (trackerCookie.length > 0) {
-        tracker = trackerCookie[0].split("=")[1];
+    <body><div class="gitbookPluginComponent"><!-- privacy management via evidon -->
+<link rel="stylesheet" type="text/css" href="https://wwwimages2.adobe.com/etc/beagle/public/globalnav/adobe-privacy/latest/privacy.min.css">
+<script defer src="https://wwwimages2.adobe.com/etc/beagle/public/globalnav/adobe-privacy/latest/privacy.min.js"></script>
+<script defer>
+  function createTrackerID() {
+    let fmt = 'xxxxxxxx-xxxx-4xxx-1xxx-xxxxxxxxxxxx';
+    return fmt.split("").map(function (c) {
+      if (c === 'x') {
+        return Math.floor(Math.random() * 16).toString(16);
       } else {
-        tracker = createTrackerID();
-        document.cookie = TRACKER_KEY + "=" + tracker;
+        return c;
       }
+    }).join("");
+  }
 
-      clearInterval(evidonTimer);
-      track();
+  let INGEST_ENDPOINT = "https://cc-api-data.adobe.io/ingest";
+  let TRACKER_KEY = "xdplatform";
+  let ENVIRONMENT = "prod";
+  let tracker;
+  let evidonTimer = setTimeout(track, 500);
 
-      if (typeof gitbook !== "undefined") {
-        gitbook.events.on("page.change", () => track());
-      }
+  /* report page hit IF we have privacy consent from the user */
+  window.addEventListener("adobePrivacy:PrivacyConsent", function () {
+
+    // check if the user has a cookie
+    let cookies = document.cookie.split(';');
+    let trackerCookie = cookies.filter(function (v) {
+      return v.trim().substr(0, TRACKER_KEY.length + 1) === TRACKER_KEY + '=';
     });
-
-    function track() {
-
-      // track the page hit
-      let req = new XMLHttpRequest();
-      req.open("POST", INGEST_ENDPOINT);
-
-      req.setRequestHeader("Content-Type", "application/json");
-      req.setRequestHeader("X-API-Key", "xdplatform-web-service");
-
-      // (Note: we don't care about errors here)
-
-      let data = {
-        "events": [{
-          "project": "xdplatform-web-service",
-          "environment": ENVIRONMENT,
-          "time": new Date().toISOString(),
-          "ingesttype": "dunamis",
-          "data": {
-            "event.workflow": "XD",
-            "event.category": "WEB",
-            "event.subcategory": "VIEW",
-            "event.type": "render",
-            "event.type": "page",
-            "event.pagename": location.hostname + location.pathname,
-            "event.user_guid": tracker || createTrackerID(), // fall back to random ID (in case of no evidon)
-            "event.user_agent": navigator.userAgent,
-            "event.language": navigator.language,
-            "event.url": location.href,
-            "event.referrer": document.referrer,
-            "source.name": "XD Platform",
-            "source.platform": "Web"
-          }
-        }]
-      };
-
-      req.send(JSON.stringify(data));
-
+    if (trackerCookie.length > 0) {
+      tracker = trackerCookie[0].split("=")[1];
+    } else {
+      tracker = createTrackerID();
+      document.cookie = TRACKER_KEY + "=" + tracker;
     }
-  </script>
 
-<header style="border-bottom: 1px solid #ddd; height: 96px; display: flex; flex-direction: row; align-items: center;">
-  <a href="/" style="height: 48px; width: 48px; margin: 0px 24px 24px; position: relative; top: 14px;">
-  <img src="/plugin-docs/images/xd-logo.png" style="height: 48px; width: 48px;"></a>
-<h1 style="font-size: 24px; margin-top: 10px;"><a href="/">Adobe XD Platform</a></h1>
-<ul style="list-style: none; margin-top: 18px;">
-    <li style="display: inline-block; margin-right: 24px; font-size: 14px;"><a href="/plugin-docs/" style="color: rgb(255, 38, 190); font-weight: bold; text-decoration: none;">Overview</a></li>
-    <li style="display: inline-block; margin-right: 24px; font-size: 14px;"><a href="/plugin-docs/tutorials/quick-start" style="color: rgb(255, 38, 190); font-weight: bold; text-decoration: none;">Quick
-            Start</a></li>
-    <li style="display: inline-block; margin-right: 24px; font-size: 14px;"><a href="/plugin-docs/reference/how-to-read.html" style="color: rgb(255, 38, 190); font-weight: bold; text-decoration: none;">API
-            Reference</a></li>
-    <li style="display: inline-block; margin-right: 24px; font-size: 14px;"><a href="https://github.com/AdobeXD/plugin-samples" target="_blank" style="color: rgb(255, 38, 190); font-weight: bold; text-decoration: none;">Samples</a></li>
-    <li style="display: inline-block; margin-right: 24px; font-size: 14px;"><a href="/plugin-docs/community.html" style="color: rgb(255, 38, 190); font-weight: bold; text-decoration: none;">Community</a></li>
-    <li style="display: inline-block; margin-right: 24px; font-size: 14px;"><a target="_blank" href="https://console.adobe.io/plugins" style="color: rgb(255, 38, 190); font-weight: bold; text-decoration: none;">Submit
-            Plugin</a></li>
-</ul>
-</header></div>
+    clearInterval(evidonTimer);
+    track();
+
+    if (typeof gitbook !== "undefined") {
+      gitbook.events.on("page.change", () => track());
+    }
+  });
+
+  function track() {
+
+    // track the page hit
+    let req = new XMLHttpRequest();
+    req.open("POST", INGEST_ENDPOINT);
+
+    req.setRequestHeader("Content-Type", "application/json");
+    req.setRequestHeader("X-API-Key", "xdplatform-web-service");
+
+    // (Note: we don't care about errors here)
+
+    let data = {
+      "events": [{
+        "project": "xdplatform-web-service",
+        "environment": ENVIRONMENT,
+        "time": new Date().toISOString(),
+        "ingesttype": "dunamis",
+        "data": {
+          "event.workflow": "XD",
+          "event.category": "WEB",
+          "event.subcategory": "VIEW",
+          "event.type": "render",
+          "event.type": "page",
+          "event.pagename": location.hostname + location.pathname,
+          "event.user_guid": tracker || createTrackerID(), // fall back to random ID (in case of no evidon)
+          "event.user_agent": navigator.userAgent,
+          "event.language": navigator.language,
+          "event.url": location.href,
+          "event.referrer": document.referrer,
+          "source.name": "XD Platform",
+          "source.platform": "Web"
+        }
+      }]
+    };
+
+    req.send(JSON.stringify(data));
+
+  }
+</script>
+
+<header style="padding-left: 5%; border-bottom: 1px solid #ddd; height: 96px; display: flex; flex-direction: row; align-items: center;">
+  <a href="https://adobexdplatform.com/" style="height: 32px; width: 32px; margin: 0px 12px 24px 0px; position: relative; top: 14px;">
+    <img src="/images/xd-logo.png" style="height: 32px; width: 32px; margin-left: 0"></a>
+  <h1 style="color: black; margin-top: 17px; margin-bottom: 14px; font-size: 18px; font-weight: bold; font-family: roboto">
+    <a href="https://adobexdplatform.com/">Adobe XD
+      Platform</a></h1>
+  <ul style="list-style: none; margin-top: 14px;">
+    <li style="display: inline-block; list-style: none; text-align: -webkit-match-parent; margin-right: 23px; ">
+      <a href="https://adobexdplatform.com/plugin-docs/" style="color: black; text-decoration: none; font-family: roboto, medium; font-size: 15px; font-weight:400;">Plugin
+        APIs</a>
+    </li>
+    <li style="display: inline-block; list-style: none; text-align: -webkit-match-parent; margin-right: 23px; ">
+      <a href="https://adobexdplatform.com/cloud-content-api-docs/" style="color: black; text-decoration: none; font-family: roboto, medium; font-size: 15px; font-weight:400;">Cloud
+        Content
+        APIs</a></li>
+    <li style="display: inline-block; list-style: none; text-align: -webkit-match-parent; margin-right: 23px;">
+      <a href="https://adobexdplatform.com/community-and-support/" style="color: black; text-decoration: none; font-family: roboto, medium; font-size: 15px; font-weight:400;">Community
+        &amp;
+        Support</a></li>
+  </ul>
+  <!-- <a style="margin-left:auto; margin-right:10%;" href="https://console.adobe.io/plugins">
+<button type="button" class="console-btn coral-btn coral-btn-cta"> I/O Developer Console</button>
+</a> -->
+</header>
+<!-- <div class="divider">
+<p class="divider-text">Community and Support</p>
+</div> --></div>
         
 <div class="book">
     <div class="book-summary">
@@ -236,7 +247,7 @@
                 <a href="../">
             
                     
-                    Quick start
+                    Overview
             
                 </a>
             
@@ -244,12 +255,39 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="../reference/">
+        <li class="chapter " data-level="1.2" data-path="../integrate.html">
+            
+                <a href="../integrate.html">
+            
+                    
+                    Integrate
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../tutorials/quick-start.html">
+            
+                <a href="../tutorials/quick-start.html">
+            
+                    
+                    Quick Start
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../reference/">
             
                 <a href="../reference/">
             
                     
-                    References
+                    Endpoint References
             
                 </a>
             
@@ -257,7 +295,20 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3" data-path="./">
+        <li class="chapter " data-level="1.2.3" data-path="../reference/faq.html">
+            
+                <a href="../reference/faq.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.4" data-path="./">
             
                 <a href="./">
             
@@ -267,6 +318,11 @@
                 </a>
             
 
+            
+        </li>
+    
+
+            </ul>
             
         </li>
     
@@ -316,6 +372,13 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="samples">Samples</h1>
+<p>Vist our <a href="https://github.com/AdobeXD/cloud-content-api-samples" target="_blank">GitHub repo of code samples</a> that demonstrate basic interaction with the Adobe XD Cloud Content APIs.</p>
+<h2 id="nodejs-example">Node.js Example</h2>
+<p>A complete Node.js-based web app example that uses Adobe XD Cloud Content APIs.</p>
+<p><a href="https://github.com/AdobeXD/cloud-content-api-samples/blob/master/cloud-content-api-node/readme.md" target="_blank">See the readme</a>.</p>
+<h2 id="python-example">Python Example</h2>
+<p>A complete Python-based web app example that uses Adobe XD Cloud Content APIs.</p>
+<p><a href="https://github.com/AdobeXD/cloud-content-api-samples/blob/master/cloud-content-api-python/readme.md" target="_blank">See the readme</a>.</p>
 
                                 
                                 </section>
@@ -343,7 +406,7 @@
 
             
                 
-                <a href="../reference/" class="navigation navigation-prev navigation-unique" aria-label="Previous page: References">
+                <a href="../reference/faq.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: FAQ">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -355,7 +418,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Samples","level":"1.3","depth":1,"previous":{"title":"References","level":"1.2","depth":1,"path":"reference/index.md","ref":"./reference/index.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc","anchorjs","collapse","-pretty-term","code","dashing","todo","-devops","expandable-chapters-interactive","styled-blockquotes","-codetabs","-recently-updated","-github-buttons","-prism","highlight","-lunr","-search","search-plus","addcssjs","replace","simpletabs","-layout","components","-lightbox","github-tables","nestedmd","image-captions","fancybox","bulk-redirect"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fancybox":{"helpers":{"buttons":{}}},"todo":{},"page-toc":{"selector":".markdown-section h2, .markdown-section h3, .markdown-section h4","position":"before-first","showByDefault":true},"styled-blockquotes":{},"addcssjs":{"js":[],"css":["./public/custom.css"]},"code":{"copyButtons":true},"collapse":{},"nestedmd":{},"github-tables":{"myConfigKey":"it's the default value"},"simpletabs":{},"dashing":{"selectors":["h1, h2, h3, h4, h5, h6, p, ul, ol"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"expandable-chapters-interactive":{},"replace":{"substitutes":[{"pattern":"\\\\\\*","flags":"g","substitute":"*"},{"pattern":"\\\\\\|","flags":"g","substitute":" or "},{"pattern":"<a name=","flags":"gi","substitute":"<a id="},{"pattern":"([^\\[])`(Attr|BaseUIEvent|CharacterData|ClassList|Clipboard|CloseEvent|Comment|Document|DocumentFragment|DOMException|DOMTokenList|DragEvent|Element|Event|EventTarget|GestureEvent|HTMLElement|HTMLAncorElement|HTMLBodyElement|HTMLButtonElement|HTMLDialogElement|HTMLFormElement|HTMLHeadElement|HTMlHtmlElement|HTMLImageElement|HTMLInputElement|HTMLLabelElement|HTMLLinkElement|HTMLMenuElement|HTMLOptionElement|HTMLProgressELement|HTMLScriptElement|HTMLSelectElement|HTMLStyleElement|HTMLTextAreaElement|KeyboardEvent|MessageEvent|NamedNodeMap|NodeList|PointerEvent|ProgressEvent|Shell|WebSocket|XMLHttpRequest|CSSRule|CSSRuleList|CSSStyleDeclaration|CSSStyleRule|CSSStyleSheet|FocusEvent)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/uxp/class/$2.html)$3"},{"pattern":"([^\\[])`(application|Blur|clipboard|Color|commands|ImageFill|LinearGradientFill|Matrix|scenegraph|SceneNodeList|selection|Shadow|OS)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/$2.html)$3"},{"pattern":"([^\\[])`(SceneNode|RootNode|Group|GraphicNode|Rectangle|Artboard|Ellipse|Line|Path|BooleanGroup|SymbolInstance|RepeatGrid|LinkedGraphic)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/scenegraph.html#$2)$3"},{"pattern":"([^\\[])`(fetch)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/uxp/function/$2.html)$3"},{"pattern":"([^\\[])`(storage)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/uxp/module/$2.html)$3"},{"pattern":"\\[`(Attr|BaseUIEvent|CharacterData|ClassList|Clipboard|CloseEvent|Comment|Document|DocumentFragment|DOMException|DOMTokenList|DragEvent|Element|Event|EventTarget|GestureEvent|HTMLElement|HTMLAncorElement|HTMLBodyElement|HTMLButtonElement|HTMLDialogElement|HTMLFormElement|HTMLHeadElement|HTMlHtmlElement|HTMLImageElement|HTMLInputElement|HTMLLabelElement|HTMLLinkElement|HTMLMenuElement|HTMLOptionElement|HTMLProgressELement|HTMLScriptElement|HTMLSelectElement|HTMLStyleElement|HTMLTextAreaElement|KeyboardEvent|MessageEvent|NamedNodeMap|NodeList|PointerEvent|ProgressEvent|Shell|WebSocket|XMLHttpRequest|CSSRule|CSSRuleList|CSSStyleDeclaration|CSSStyleRule|CSSStyleSheet|FocusEvent)`\\]\\([^\\)]*\\)","flags":"g","substitute":"[ `$1` ](/reference/uxp/class/$1.html)"},{"pattern":"\\([^#\\)]*#(storage)\\)","flags":"g","substitute":"(/reference/uxp/module/$1.html)"},{"pattern":"\\([^#\\)]*#(fetch)\\)","flags":"g","substitute":"(/reference/uxp/function/$1.html)"}]},"components":{"templatePath":"public/","templates":[{"name":"header","target":"body","prepend":"true"},{"name":"footer","target":"body","prepend":"false"}]},"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"github-buttons":{"buttons":[{"user":"AdobeXD","repo":"Plugin-Docs","type":"star","size":"small"},{"user":"AdobeXD","type":"follow","width":"130","count":false,"size":"small"}]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{},"search-plus":{},"image-captions":{"variable_name":"_pictures"}},"theme":"default","author":"Adobe","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Georgia","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[]},"title":"Adobe XD Cloud Reference","gitbook":"*","description":"Documentation, tutorials, how-tos, and technical reference for building Adobe XD Cloud integrations"},"file":{"path":"samples/index.md","mtime":"2019-09-16T18:10:40.889Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-16T18:54:18.744Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Samples","level":"1.2.4","depth":2,"previous":{"title":"FAQ","level":"1.2.3","depth":2,"path":"reference/faq.md","ref":"./reference/faq.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc","anchorjs","collapse","-pretty-term","code","dashing","todo","-devops","expandable-chapters-interactive","styled-blockquotes","-codetabs","-recently-updated","-github-buttons","-prism","highlight","-lunr","-search","search-plus","addcssjs","replace","simpletabs","-layout","components","-lightbox","github-tables","nestedmd","image-captions","fancybox","bulk-redirect"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fancybox":{"helpers":{"buttons":{}}},"todo":{},"page-toc":{"selector":".markdown-section h2, .markdown-section h3, .markdown-section h4","position":"before-first","showByDefault":true},"styled-blockquotes":{},"addcssjs":{"js":[],"css":["./public/custom.css"]},"code":{"copyButtons":true},"collapse":{},"nestedmd":{},"github-tables":{"myConfigKey":"it's the default value"},"simpletabs":{},"dashing":{"selectors":["h1, h2, h3, h4, h5, h6, p, ul, ol"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"expandable-chapters-interactive":{},"replace":{"substitutes":[{"pattern":"\\\\\\*","flags":"g","substitute":"*"},{"pattern":"\\\\\\|","flags":"g","substitute":" or "},{"pattern":"<a name=","flags":"gi","substitute":"<a id="},{"pattern":"([^\\[])`(Attr|BaseUIEvent|CharacterData|ClassList|Clipboard|CloseEvent|Comment|Document|DocumentFragment|DOMException|DOMTokenList|DragEvent|Element|Event|EventTarget|GestureEvent|HTMLElement|HTMLAncorElement|HTMLBodyElement|HTMLButtonElement|HTMLDialogElement|HTMLFormElement|HTMLHeadElement|HTMlHtmlElement|HTMLImageElement|HTMLInputElement|HTMLLabelElement|HTMLLinkElement|HTMLMenuElement|HTMLOptionElement|HTMLProgressELement|HTMLScriptElement|HTMLSelectElement|HTMLStyleElement|HTMLTextAreaElement|KeyboardEvent|MessageEvent|NamedNodeMap|NodeList|PointerEvent|ProgressEvent|Shell|WebSocket|XMLHttpRequest|CSSRule|CSSRuleList|CSSStyleDeclaration|CSSStyleRule|CSSStyleSheet|FocusEvent)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/uxp/class/$2.html)$3"},{"pattern":"([^\\[])`(application|Blur|clipboard|Color|commands|ImageFill|LinearGradientFill|Matrix|scenegraph|SceneNodeList|selection|Shadow|OS)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/$2.html)$3"},{"pattern":"([^\\[])`(SceneNode|RootNode|Group|GraphicNode|Rectangle|Artboard|Ellipse|Line|Path|BooleanGroup|SymbolInstance|RepeatGrid|LinkedGraphic)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/scenegraph.html#$2)$3"},{"pattern":"([^\\[])`(fetch)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/uxp/function/$2.html)$3"},{"pattern":"([^\\[])`(storage)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/uxp/module/$2.html)$3"},{"pattern":"\\[`(Attr|BaseUIEvent|CharacterData|ClassList|Clipboard|CloseEvent|Comment|Document|DocumentFragment|DOMException|DOMTokenList|DragEvent|Element|Event|EventTarget|GestureEvent|HTMLElement|HTMLAncorElement|HTMLBodyElement|HTMLButtonElement|HTMLDialogElement|HTMLFormElement|HTMLHeadElement|HTMlHtmlElement|HTMLImageElement|HTMLInputElement|HTMLLabelElement|HTMLLinkElement|HTMLMenuElement|HTMLOptionElement|HTMLProgressELement|HTMLScriptElement|HTMLSelectElement|HTMLStyleElement|HTMLTextAreaElement|KeyboardEvent|MessageEvent|NamedNodeMap|NodeList|PointerEvent|ProgressEvent|Shell|WebSocket|XMLHttpRequest|CSSRule|CSSRuleList|CSSStyleDeclaration|CSSStyleRule|CSSStyleSheet|FocusEvent)`\\]\\([^\\)]*\\)","flags":"g","substitute":"[ `$1` ](/reference/uxp/class/$1.html)"},{"pattern":"\\([^#\\)]*#(storage)\\)","flags":"g","substitute":"(/reference/uxp/module/$1.html)"},{"pattern":"\\([^#\\)]*#(fetch)\\)","flags":"g","substitute":"(/reference/uxp/function/$1.html)"}]},"components":{"templatePath":"public/","templates":[{"name":"header","target":"body","prepend":"true"},{"name":"footer","target":"body","prepend":"false"}]},"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"github-buttons":{"buttons":[{"user":"AdobeXD","repo":"Plugin-Docs","type":"star","size":"small"},{"user":"AdobeXD","type":"follow","width":"130","count":false,"size":"small"}]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{},"search-plus":{},"image-captions":{"variable_name":"_pictures"}},"theme":"default","author":"Adobe","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Georgia","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"./index.html#fig1.1.1","level":"1.1","list_caption":"Figure: Quick start: make your first call","alt":"Quick start: make your first call","nro":1,"url":"/images/code2.svg","index":1,"caption_template":"Figure: _CAPTION_","label":"Quick start: make your first call","attributes":{},"skip":false,"key":"1.1.1"},{"backlink":"./index.html#fig1.1.2","level":"1.1","list_caption":"Figure: Get your unique API key","alt":"Get your unique API key","nro":2,"url":"/images/get-started.svg","index":2,"caption_template":"Figure: _CAPTION_","label":"Get your unique API key","attributes":{},"skip":false,"key":"1.1.2"},{"backlink":"./index.html#fig1.1.3","level":"1.1","list_caption":"Figure: XD Cloud Content API developer community","alt":"XD Cloud Content API developer community","nro":3,"url":"/images/cloud-community.png","index":3,"caption_template":"Figure: _CAPTION_","label":"XD Cloud Content API developer community","attributes":{},"skip":false,"key":"1.1.3"},{"backlink":"./tutorials/quick-start.html#fig1.2.1.1","level":"1.2.1","list_caption":"Figure: Share for review","alt":"Share for review","nro":4,"url":"/images/share-button-click.png","index":1,"caption_template":"Figure: _CAPTION_","label":"Share for review","attributes":{},"skip":false,"key":"1.2.1.1"},{"backlink":"./tutorials/quick-start.html#fig1.2.1.2","level":"1.2.1","list_caption":"Figure: Set options and create a link","alt":"Set options and create a link","nro":5,"url":"/images/create-link-button-click.png","index":2,"caption_template":"Figure: _CAPTION_","label":"Set options and create a link","attributes":{},"skip":false,"key":"1.2.1.2"},{"backlink":"./tutorials/quick-start.html#fig1.2.1.3","level":"1.2.1","list_caption":"Figure: Copy link to the clipboard","alt":"Copy link to the clipboard","nro":6,"url":"/images/copy-link.png","index":3,"caption_template":"Figure: _CAPTION_","label":"Copy link to the clipboard","attributes":{},"skip":false,"key":"1.2.1.3"}]},"title":"Adobe XD Cloud Reference","gitbook":"*","description":"Documentation, tutorials, how-tos, and technical reference for building Adobe XD Cloud integrations"},"file":{"path":"samples/index.md","mtime":"2019-11-01T20:20:55.543Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-04T04:03:24.876Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -442,8 +505,9 @@
 
     <div class="gitbookPluginComponent"><div style="background-size: cover; background-color: rgb(44, 44, 44);">
     <div style="display: flex; flex-flow: row wrap; justify-content: space-between; align-items: baseline; margin: 0 28px; line-height: 32px;">
-        <p style="margin: 0;" class="footer evidon-notice-link">&#xA9; Copyright 2018 Adobe. All rights reserved. / <a rel="noopener noreferrer" target="_blank" href="https://www.adobe.com/privacy.html">Privacy</a>
-            / <a target="_blank" rel="noopener noreferrer" href="https://www.adobe.com/legal/terms.html">Terms of Use</a> / <a target="_blank" rel="noopener noreferrer" href="https://www.adobe.com/privacy/cookies.html">Cookies</a> /
+        <p style="margin: 0;" class="footer evidon-notice-link">&#xA9; Copyright 2019 Adobe. All rights reserved. / <a rel="noopener noreferrer" target="_blank" href="https://www.adobe.com/privacy.html">Privacy</a>
+            / <a target="_blank" rel="noopener noreferrer" href="https://www.adobe.com/legal/terms.html">Terms of
+                Use</a> / <a target="_blank" rel="noopener noreferrer" href="https://www.adobe.com/privacy/cookies.html">Cookies</a> /
         </p>
     </div>
 </div></div></body>
