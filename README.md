@@ -4,8 +4,6 @@
 
 XD Cloud Content APIs let you integrate design work created in Adobe XD with environments where stakeholders and clients spend time, like project management tools, storage services, and beyond.
 
-<br />
-
 <a href="/tutorials/quick-start.md"><img alt="Integrate: API references and code samples" src="/images/integrate@3x.png" class="plain" style="width: 100%"/></a>
 
 <br />
