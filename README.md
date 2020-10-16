@@ -30,4 +30,4 @@ To communicate with XD Cloud Content APIs, you’ll need your own unique API key
 
 <br />
 
-<img alt="XD Cloud Content API developer community" src="/images/cloud-community.png" class="plain" style="width: 100%"/>
+<a href="https://forums.creativeclouddeveloper.com/c/adobe-xd/cloud-content-api/6"><img alt="XD Cloud Content API developer community" src="/images/cloud-community.png" class="plain" style="width: 100%"/></a>
