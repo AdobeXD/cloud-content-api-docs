@@ -16,19 +16,6 @@ The below security checklist is a general guidance to all integrations using Ado
 |   |                                                                        |   | Check if access token belongs to your application or client                                      |
 
 
-#### Security Checklist
-
-| Client Side                                                            | Server Side |
-| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| Use state parameter to prevent CSRF attack                             | Perform Online token validation                                                                  |
-| Do not pass tokens in query string                                     | Pass ‘type’ parameter for validate token API                                                     |
-| Avoid storing access token and user profile in browser’s local storage | Do not log IMS tokens in logs                                                                    |
-| Ensure tokens are sent over TLS (HTTPS)                                | Never include your IMS client secret and permanent auth code in source code; Store them in Vault |
-| Use latest version of IMS APIs                                         | Check for ‘system’ scope before providing access to a resource in service to service calls       |
-|                                                                        | Encrypt refresh/access token while storing them on the server side                               |
-|                                                                        | Check if access token belongs to your application or client                                      |
-
-
 #### Logging
 
 * If you need to log IMS tokens for debugging purpose then you should remove the signature part from the token which makes it invalid. The token format is HEADER.PAYLOAD.SIGNATURE.  Alternatively, you could log the decoded JSON payload which is search friendly.
