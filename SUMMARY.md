@@ -6,4 +6,5 @@
     * [Endpoint References](./reference/index.md)
     * [FAQ](./reference/faq.md)
     * [Samples](./samples/index.md)
+    * [Best Practices](./reference/best-practices.md)
 

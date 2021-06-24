@@ -1,4 +1,5 @@
-# Endpoint References
+# Best Practices
+
 The below security checklist is a general guidance to all integrations using Adobe IMS authorization to access private XD artefacts. There could be other security requirements for your integration depending upon your design.  
 
 #### Security Checklist
