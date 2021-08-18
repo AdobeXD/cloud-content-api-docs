@@ -5,4 +5,4 @@ Thanks for choosing to integrate with the XD Cloud Content APIs. We have put tog
 - [Quick start](/tutorials/quick-start.md)
 - [Endpoint References](/reference/index.md)
 - [Samples](/samples/index.md)
-- [Security token and Secret handling best practises](/reference/best-practices.md)
+- [Secret handling best practices](/reference/best-practices.md)
