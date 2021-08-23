@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>FAQ &#xB7; Adobe XD Cloud Reference</title>
+        <title>Secret handling best practices &#xB7; Adobe XD Cloud Reference</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content>
         <meta name="generator" content="GitBook 3.2.3">
@@ -102,10 +102,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../samples/">
     
-    
-    <link rel="prev" href="./">
+    <link rel="prev" href="../samples/">
     
 
     </head>
@@ -297,7 +295,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.3" data-path="faq.html">
+        <li class="chapter " data-level="1.2.3" data-path="faq.html">
             
                 <a href="faq.html">
             
@@ -323,7 +321,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5" data-path="best-practices.html">
+        <li class="chapter active" data-level="1.2.5" data-path="best-practices.html">
             
                 <a href="best-practices.html">
             
@@ -371,7 +369,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="..">FAQ</a>
+        <a href="..">Secret handling best practices</a>
     </h1>
 </div>
 
@@ -386,23 +384,72 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="faq">FAQ</h1>
-<p>Below you&apos;ll find answers to some frequently asked questions.</p>
-<h2 id="what-rate-limits-are-there-on-api-calls">What rate limits are there on API calls?</h2>
-<p>XD Cloud Content API integrations are limited to no more than 10 calls per second. </p>
-<h2 id="do-artboard-thumbnails-renditions-have-a-lifespan">Do artboard thumbnails (renditions) have a lifespan?</h2>
-<p>Thumbnail URLs returned by the Cloud Content APIs are only live for 24 hours. Make sure that your application sends a new request to receive updated thumbnail URLs.</p>
-<h2 id="is-it-possible-to-access-private-xd-cloud-documents-through-these-apis">Is it possible to access private XD cloud documents through these APIs?</h2>
-<p>Yes, provided that the user grants you <a href="../tutorials/quick-start.html#1-decide-whether-your-app-will-access-private-cloud-docs-or-not">access via OAuth</a>.</p>
-<p>However, it is important to note that only private cloud documents created by <strong>individual users</strong> are accessible. Private cloud documents created by <strong>enterprise users</strong> will be supported in the future.</p>
-<h2 id="what-happens-if-i-request-a-cloud-document-that-has-been-deleted">What happens if I request a cloud document that has been deleted?</h2>
-<p>If the cloud document or its published link is deleted by the author, the API will return the following body in the response:</p>
-<pre><code>{
-    &quot;error&quot;: {
-        &quot;message&quot;: &quot;Specified resource not found or not authorized&quot;
-    }
-}
-</code></pre>
+                                <h1 id="token-handling-best-practices">Token Handling Best Practices</h1>
+<p>The below security checklist is a general guidance to all integrations using Adobe IMS authorization to access private XD artefacts. There could be other security requirements for your integration depending upon your design.  </p>
+<h4 id="security-checklist">Security Checklist</h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Client Side</th>
+<th></th>
+<th>Server Side</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>Use state parameter to prevent CSRF attack</td>
+<td></td>
+<td>Do not log IMS tokens in logs</td>
+</tr>
+<tr>
+<td></td>
+<td>Do not pass tokens in query string</td>
+<td></td>
+<td>Never include your IMS client secret and permanent auth code in source code; Store them in a secure secret management system.</td>
+</tr>
+<tr>
+<td></td>
+<td>Avoid storing access token and user profile in browser&#x2019;s local storage</td>
+<td></td>
+<td>Encrypt refresh/access token while storing them on the server side</td>
+</tr>
+<tr>
+<td></td>
+<td>Ensure tokens are sent over TLS (HTTPS)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Use latest version of IMS APIs</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="logging">Logging</h4>
+<ul>
+<li>If you need to log IMS tokens for debugging purpose then you should remove the signature part from the token which makes it invalid. The token format is HEADER.PAYLOAD.<strong>SIGNATURE</strong>.  Alternatively, you could log the decoded JSON payload which is search friendly.</li>
+<li><strong>Keep in mind access token might contain PII data.</strong> Talk to Legal researcher/team to come up with the right strategy. </li>
+</ul>
+<h4 id="client-side-token-storage">Client side token storage</h4>
+<p>Avoid storing IMS user access token in browser cookie. Use browser&apos;s session storage to persist any sensitive data. If you are using IMS javascript library then the access token and profile information will already be stored in session storage for you. 
+If you are storing IMS access token in cookie and using it as session cookie then you need to make sure to</p>
+<ul>
+<li><strong>Implement CSRF protection</strong> </li>
+<li><strong>Set &apos;Secure&apos; flag to the cookie</strong>. This instructs the browser to send the cookie information only over HTTPS.</li>
+<li><strong>Set &apos;HTTPOnly&apos; flag</strong> if you are setting the cookie using server side code. </li>
+</ul>
+<h4 id="server-side-token-storage">Server side token storage</h4>
+<p>Application might have to store access token or refresh token on the server side for certain use case or while using refresh token grant type. Refresh token and access token must be kept confidential in transit and storage. The token should be encrypted by the application and stored in the database. (Do not use disk level encryption or transparent data encryption as they don&apos;t protect the tokens against SQL injection type attacks). </p>
+<h4 id="secret-storage">Secret Storage</h4>
+<ul>
+<li>If you have AdobeIO credentials in source code or accidentally committed them in your source code repository then you need to reach out to Adobe admins team to rotate the credentials.</li>
+<li>Make sure to store the new credentials in a secure secret management system. </li>
+<li><strong>Rotation policy</strong>: General guidelines is to rotate the credential if it is leaked or person who had access to the credential left Adobe/team. </li>
+</ul>
+
                                 
                                 </section>
                             
@@ -429,14 +476,10 @@
 
             
                 
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Endpoint References">
+                <a href="../samples/" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Samples">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="../samples/" class="navigation navigation-next " aria-label="Next page: Samples">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -445,7 +488,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"FAQ","level":"1.2.3","depth":2,"next":{"title":"Samples","level":"1.2.4","depth":2,"path":"samples/index.md","ref":"./samples/index.md","articles":[]},"previous":{"title":"Endpoint References","level":"1.2.2","depth":2,"path":"reference/index.md","ref":"./reference/index.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc","anchorjs","collapse","-pretty-term","code","dashing","todo","-devops","expandable-chapters-interactive","styled-blockquotes","-codetabs","-recently-updated","-github-buttons","-prism","highlight","-lunr","-search","search-plus","addcssjs","replace","simpletabs","-layout","components","-lightbox","github-tables","nestedmd","image-captions","fancybox","bulk-redirect"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fancybox":{"helpers":{"buttons":{}}},"todo":{},"page-toc":{"selector":".markdown-section h2, .markdown-section h3, .markdown-section h4","position":"before-first","showByDefault":true},"styled-blockquotes":{},"addcssjs":{"js":[],"css":["./public/custom.css"]},"code":{"copyButtons":true},"collapse":{},"nestedmd":{},"github-tables":{"myConfigKey":"it's the default value"},"simpletabs":{},"dashing":{"selectors":["h1, h2, h3, h4, h5, h6, p, ul, ol"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"expandable-chapters-interactive":{},"replace":{"substitutes":[{"pattern":"\\\\\\*","flags":"g","substitute":"*"},{"pattern":"\\\\\\|","flags":"g","substitute":" or "},{"pattern":"<a name=","flags":"gi","substitute":"<a id="},{"pattern":"([^\\[])`(Attr|BaseUIEvent|CharacterData|ClassList|Clipboard|CloseEvent|Comment|Document|DocumentFragment|DOMException|DOMTokenList|DragEvent|Element|Event|EventTarget|GestureEvent|HTMLElement|HTMLAncorElement|HTMLBodyElement|HTMLButtonElement|HTMLDialogElement|HTMLFormElement|HTMLHeadElement|HTMlHtmlElement|HTMLImageElement|HTMLInputElement|HTMLLabelElement|HTMLLinkElement|HTMLMenuElement|HTMLOptionElement|HTMLProgressELement|HTMLScriptElement|HTMLSelectElement|HTMLStyleElement|HTMLTextAreaElement|KeyboardEvent|MessageEvent|NamedNodeMap|NodeList|PointerEvent|ProgressEvent|Shell|WebSocket|XMLHttpRequest|CSSRule|CSSRuleList|CSSStyleDeclaration|CSSStyleRule|CSSStyleSheet|FocusEvent)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/uxp/class/$2.html)$3"},{"pattern":"([^\\[])`(application|Blur|clipboard|Color|commands|ImageFill|LinearGradientFill|Matrix|scenegraph|SceneNodeList|selection|Shadow|OS)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/$2.html)$3"},{"pattern":"([^\\[])`(SceneNode|RootNode|Group|GraphicNode|Rectangle|Artboard|Ellipse|Line|Path|BooleanGroup|SymbolInstance|RepeatGrid|LinkedGraphic)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/scenegraph.html#$2)$3"},{"pattern":"([^\\[])`(fetch)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/uxp/function/$2.html)$3"},{"pattern":"([^\\[])`(storage)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/uxp/module/$2.html)$3"},{"pattern":"\\[`(Attr|BaseUIEvent|CharacterData|ClassList|Clipboard|CloseEvent|Comment|Document|DocumentFragment|DOMException|DOMTokenList|DragEvent|Element|Event|EventTarget|GestureEvent|HTMLElement|HTMLAncorElement|HTMLBodyElement|HTMLButtonElement|HTMLDialogElement|HTMLFormElement|HTMLHeadElement|HTMlHtmlElement|HTMLImageElement|HTMLInputElement|HTMLLabelElement|HTMLLinkElement|HTMLMenuElement|HTMLOptionElement|HTMLProgressELement|HTMLScriptElement|HTMLSelectElement|HTMLStyleElement|HTMLTextAreaElement|KeyboardEvent|MessageEvent|NamedNodeMap|NodeList|PointerEvent|ProgressEvent|Shell|WebSocket|XMLHttpRequest|CSSRule|CSSRuleList|CSSStyleDeclaration|CSSStyleRule|CSSStyleSheet|FocusEvent)`\\]\\([^\\)]*\\)","flags":"g","substitute":"[ `$1` ](/reference/uxp/class/$1.html)"},{"pattern":"\\([^#\\)]*#(storage)\\)","flags":"g","substitute":"(/reference/uxp/module/$1.html)"},{"pattern":"\\([^#\\)]*#(fetch)\\)","flags":"g","substitute":"(/reference/uxp/function/$1.html)"}]},"components":{"templatePath":"public/","templates":[{"name":"header","target":"body","prepend":"true"},{"name":"footer","target":"body","prepend":"false"}]},"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"github-buttons":{"buttons":[{"user":"AdobeXD","repo":"Plugin-Docs","type":"star","size":"small"},{"user":"AdobeXD","type":"follow","width":"130","count":false,"size":"small"}]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{},"search-plus":{},"image-captions":{"variable_name":"_pictures"}},"theme":"default","author":"Adobe","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Georgia","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"./index.html#fig1.1.1","level":"1.1","list_caption":"Figure: Quick start: make your first call","alt":"Quick start: make your first call","nro":1,"url":"/images/code2.svg","index":1,"caption_template":"Figure: _CAPTION_","label":"Quick start: make your first call","attributes":{},"skip":false,"key":"1.1.1"},{"backlink":"./index.html#fig1.1.2","level":"1.1","list_caption":"Figure: Get your unique API key","alt":"Get your unique API key","nro":2,"url":"/images/get-started.svg","index":2,"caption_template":"Figure: _CAPTION_","label":"Get your unique API key","attributes":{},"skip":false,"key":"1.1.2"},{"backlink":"./index.html#fig1.1.3","level":"1.1","list_caption":"Figure: XD Cloud Content API developer community","alt":"XD Cloud Content API developer community","nro":3,"url":"/images/cloud-community.png","index":3,"caption_template":"Figure: _CAPTION_","label":"XD Cloud Content API developer community","attributes":{},"skip":false,"key":"1.1.3"},{"backlink":"./tutorials/quick-start.html#fig1.2.1.1","level":"1.2.1","list_caption":"Figure: Share for review","alt":"Share for review","nro":4,"url":"/images/share-button-click.png","index":1,"caption_template":"Figure: _CAPTION_","label":"Share for review","attributes":{},"skip":false,"key":"1.2.1.1"},{"backlink":"./tutorials/quick-start.html#fig1.2.1.2","level":"1.2.1","list_caption":"Figure: Set options and create a link","alt":"Set options and create a link","nro":5,"url":"/images/create-link-button-click.png","index":2,"caption_template":"Figure: _CAPTION_","label":"Set options and create a link","attributes":{},"skip":false,"key":"1.2.1.2"},{"backlink":"./tutorials/quick-start.html#fig1.2.1.3","level":"1.2.1","list_caption":"Figure: Copy link to the clipboard","alt":"Copy link to the clipboard","nro":6,"url":"/images/copy-link.png","index":3,"caption_template":"Figure: _CAPTION_","label":"Copy link to the clipboard","attributes":{},"skip":false,"key":"1.2.1.3"}]},"title":"Adobe XD Cloud Reference","gitbook":"*","description":"Documentation, tutorials, how-tos, and technical reference for building Adobe XD Cloud integrations"},"file":{"path":"reference/faq.md","mtime":"2021-06-09T16:27:38.613Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-23T18:49:37.178Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Secret handling best practices","level":"1.2.5","depth":2,"previous":{"title":"Samples","level":"1.2.4","depth":2,"path":"samples/index.md","ref":"./samples/index.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc","anchorjs","collapse","-pretty-term","code","dashing","todo","-devops","expandable-chapters-interactive","styled-blockquotes","-codetabs","-recently-updated","-github-buttons","-prism","highlight","-lunr","-search","search-plus","addcssjs","replace","simpletabs","-layout","components","-lightbox","github-tables","nestedmd","image-captions","fancybox","bulk-redirect"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"fancybox":{"helpers":{"buttons":{}}},"todo":{},"page-toc":{"selector":".markdown-section h2, .markdown-section h3, .markdown-section h4","position":"before-first","showByDefault":true},"styled-blockquotes":{},"addcssjs":{"js":[],"css":["./public/custom.css"]},"code":{"copyButtons":true},"collapse":{},"nestedmd":{},"github-tables":{"myConfigKey":"it's the default value"},"simpletabs":{},"dashing":{"selectors":["h1, h2, h3, h4, h5, h6, p, ul, ol"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"expandable-chapters-interactive":{},"replace":{"substitutes":[{"pattern":"\\\\\\*","flags":"g","substitute":"*"},{"pattern":"\\\\\\|","flags":"g","substitute":" or "},{"pattern":"<a name=","flags":"gi","substitute":"<a id="},{"pattern":"([^\\[])`(Attr|BaseUIEvent|CharacterData|ClassList|Clipboard|CloseEvent|Comment|Document|DocumentFragment|DOMException|DOMTokenList|DragEvent|Element|Event|EventTarget|GestureEvent|HTMLElement|HTMLAncorElement|HTMLBodyElement|HTMLButtonElement|HTMLDialogElement|HTMLFormElement|HTMLHeadElement|HTMlHtmlElement|HTMLImageElement|HTMLInputElement|HTMLLabelElement|HTMLLinkElement|HTMLMenuElement|HTMLOptionElement|HTMLProgressELement|HTMLScriptElement|HTMLSelectElement|HTMLStyleElement|HTMLTextAreaElement|KeyboardEvent|MessageEvent|NamedNodeMap|NodeList|PointerEvent|ProgressEvent|Shell|WebSocket|XMLHttpRequest|CSSRule|CSSRuleList|CSSStyleDeclaration|CSSStyleRule|CSSStyleSheet|FocusEvent)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/uxp/class/$2.html)$3"},{"pattern":"([^\\[])`(application|Blur|clipboard|Color|commands|ImageFill|LinearGradientFill|Matrix|scenegraph|SceneNodeList|selection|Shadow|OS)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/$2.html)$3"},{"pattern":"([^\\[])`(SceneNode|RootNode|Group|GraphicNode|Rectangle|Artboard|Ellipse|Line|Path|BooleanGroup|SymbolInstance|RepeatGrid|LinkedGraphic)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/scenegraph.html#$2)$3"},{"pattern":"([^\\[])`(fetch)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/uxp/function/$2.html)$3"},{"pattern":"([^\\[])`(storage)`([^\\]])","flags":"g","substitute":"$1[`$2`](/reference/uxp/module/$2.html)$3"},{"pattern":"\\[`(Attr|BaseUIEvent|CharacterData|ClassList|Clipboard|CloseEvent|Comment|Document|DocumentFragment|DOMException|DOMTokenList|DragEvent|Element|Event|EventTarget|GestureEvent|HTMLElement|HTMLAncorElement|HTMLBodyElement|HTMLButtonElement|HTMLDialogElement|HTMLFormElement|HTMLHeadElement|HTMlHtmlElement|HTMLImageElement|HTMLInputElement|HTMLLabelElement|HTMLLinkElement|HTMLMenuElement|HTMLOptionElement|HTMLProgressELement|HTMLScriptElement|HTMLSelectElement|HTMLStyleElement|HTMLTextAreaElement|KeyboardEvent|MessageEvent|NamedNodeMap|NodeList|PointerEvent|ProgressEvent|Shell|WebSocket|XMLHttpRequest|CSSRule|CSSRuleList|CSSStyleDeclaration|CSSStyleRule|CSSStyleSheet|FocusEvent)`\\]\\([^\\)]*\\)","flags":"g","substitute":"[ `$1` ](/reference/uxp/class/$1.html)"},{"pattern":"\\([^#\\)]*#(storage)\\)","flags":"g","substitute":"(/reference/uxp/module/$1.html)"},{"pattern":"\\([^#\\)]*#(fetch)\\)","flags":"g","substitute":"(/reference/uxp/function/$1.html)"}]},"components":{"templatePath":"public/","templates":[{"name":"header","target":"body","prepend":"true"},{"name":"footer","target":"body","prepend":"false"}]},"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"github-buttons":{"buttons":[{"user":"AdobeXD","repo":"Plugin-Docs","type":"star","size":"small"},{"user":"AdobeXD","type":"follow","width":"130","count":false,"size":"small"}]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{},"search-plus":{},"image-captions":{"variable_name":"_pictures"}},"theme":"default","author":"Adobe","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Georgia","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"./index.html#fig1.1.1","level":"1.1","list_caption":"Figure: Quick start: make your first call","alt":"Quick start: make your first call","nro":1,"url":"/images/code2.svg","index":1,"caption_template":"Figure: _CAPTION_","label":"Quick start: make your first call","attributes":{},"skip":false,"key":"1.1.1"},{"backlink":"./index.html#fig1.1.2","level":"1.1","list_caption":"Figure: Get your unique API key","alt":"Get your unique API key","nro":2,"url":"/images/get-started.svg","index":2,"caption_template":"Figure: _CAPTION_","label":"Get your unique API key","attributes":{},"skip":false,"key":"1.1.2"},{"backlink":"./index.html#fig1.1.3","level":"1.1","list_caption":"Figure: XD Cloud Content API developer community","alt":"XD Cloud Content API developer community","nro":3,"url":"/images/cloud-community.png","index":3,"caption_template":"Figure: _CAPTION_","label":"XD Cloud Content API developer community","attributes":{},"skip":false,"key":"1.1.3"},{"backlink":"./tutorials/quick-start.html#fig1.2.1.1","level":"1.2.1","list_caption":"Figure: Share for review","alt":"Share for review","nro":4,"url":"/images/share-button-click.png","index":1,"caption_template":"Figure: _CAPTION_","label":"Share for review","attributes":{},"skip":false,"key":"1.2.1.1"},{"backlink":"./tutorials/quick-start.html#fig1.2.1.2","level":"1.2.1","list_caption":"Figure: Set options and create a link","alt":"Set options and create a link","nro":5,"url":"/images/create-link-button-click.png","index":2,"caption_template":"Figure: _CAPTION_","label":"Set options and create a link","attributes":{},"skip":false,"key":"1.2.1.2"},{"backlink":"./tutorials/quick-start.html#fig1.2.1.3","level":"1.2.1","list_caption":"Figure: Copy link to the clipboard","alt":"Copy link to the clipboard","nro":6,"url":"/images/copy-link.png","index":3,"caption_template":"Figure: _CAPTION_","label":"Copy link to the clipboard","attributes":{},"skip":false,"key":"1.2.1.3"}]},"title":"Adobe XD Cloud Reference","gitbook":"*","description":"Documentation, tutorials, how-tos, and technical reference for building Adobe XD Cloud integrations"},"file":{"path":"reference/best-practices.md","mtime":"2021-08-23T18:42:42.356Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-23T18:49:37.178Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
