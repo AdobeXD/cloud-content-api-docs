@@ -31,7 +31,7 @@ If you are storing IMS access token in cookie and using it as session cookie the
 
 #### Server side token storage
 
-Application might have to store access token or refresh token on the server side for certain use case or while using refresh token grant type. Refresh token and access token must be kept confidential in transit and storage. The token should to be encrypted by the application and stored in the database. (Do not use disk level encryption or transparent data encryption as they don't protect the tokens against SQL injection type attacks). 
+Application might have to store access token or refresh token on the server side for certain use case or while using refresh token grant type. Refresh token and access token must be kept confidential in transit and storage. The token should be encrypted by the application and stored in the database. (Do not use disk level encryption or transparent data encryption as they don't protect the tokens against SQL injection type attacks). 
 
 
 #### Secret Storage
