@@ -1,5 +1,11 @@
 # Cloud Content APIs
 
+
+*As of February 2022, new access requests for the XD Cloud Content APIs are now closed.* In order to focus on the future of creativity and design in a Web-first world, the Adobe XD team is hard at work building a foundation for a new ecosystem of Web tools and APIs. 
+
+Developers with existing access to the XD Cloud Content APIs will retain access, and their integrations will continue to function as usual at this time. Please use this page as a reference for any further communication regarding the status of the APIs and its future alternatives.
+
+
 **Connect XD design work to your product or service**
 
 XD Cloud Content APIs let you integrate design work created in Adobe XD with environments where stakeholders and clients spend time, like project management tools, storage services, and beyond.
@@ -22,11 +28,6 @@ Crack open your terminal and get ready to make your first cURL call. The XD Clou
 
 <img alt="Get your unique API key" src="/images/get-started.svg" class="plain" style="width: 100%"/>
 
-**Get your unique API key**
-
-To communicate with XD Cloud Content APIs, you’ll need your own unique API key to send along with each request. You can get your API key by reaching out and telling us a little about the integration you want to build.
-
-**[Contact us](https://adobe.allegiancetech.com/surveys/JDQ78F/)**
 
 <br />
 
