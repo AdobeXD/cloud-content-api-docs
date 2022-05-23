@@ -52,3 +52,17 @@ python -m SimpleHTTPServer 8000
 ```
 
 Testing this way is important since formatting that looks fine in your Markdown viewer of choice may be interpreted differently by Gitbook's HTML generator.
+
+## Deploying changes
+
+Prerequisites:
+- Write-access to the repository
+- Node v10 (use `nvm use 10` if you have `nvm` installed)
+
+Steps:
+1. Clone the repository and check out the `master` branch
+2. Run `npm ci` in the repo folder using the command line
+3. Run `npm run book:build`
+4. Run `npm run book:publish:github`
+
+Done. This commits the changes to the `gh-pages` branch, which triggers an automatic GitHub pages deployment.
