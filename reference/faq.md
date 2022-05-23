@@ -2,6 +2,12 @@
 
 Below you'll find answers to some frequently asked questions.
 
+## How can I request an access token?
+
+**As of February 2022, new token requests for the XD Cloud Content APIs are closed.** In order to focus on the future of creativity and design in a Web-first world, the Adobe XD team is hard at work building a foundation for a new ecosystem of Web tools and APIs. 
+
+Developers with existing access to the XD Cloud Content APIs will retain access, and integrations will continue to function.
+
 ## What rate limits are there on API calls?
 
 XD Cloud Content API integrations are limited to no more than 10 calls per second. 
